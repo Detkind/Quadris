@@ -16,10 +16,6 @@ namespace Quadris {
 	private Label[,] gridControls; //Creats the grid
 	private Board board; //Creates the board
 
-	private SoundPlayer sndPlayer;
-    private Label[,] gridControls;
-    private Board board;
-    
     private SoundPlayer sndPlayer;
 
 	private static readonly Dictionary<PieceColor, Image> pieceColorToImgMap = new Dictionary<PieceColor, Image> {
