@@ -15,7 +15,7 @@ namespace Quadris {
 
     private Label[,] gridControls;
     private Board board;
-
+    
     private SoundPlayer sndPlayer;
 
     private static readonly Dictionary<PieceColor, Image> pieceColorToImgMap = new Dictionary<PieceColor, Image> {
@@ -42,6 +42,8 @@ namespace Quadris {
       board = new Board();
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
+      Piece nextPiece = Piece.GetRandPiece();
+      board.nextPiece = nextPiece;
       CreateGrid();
       sndPlayer = new SoundPlayer(Resources.bg_music);
       sndPlayer.PlayLooping();
@@ -59,6 +61,10 @@ namespace Quadris {
           gridControls[row, col] = lblCell;
         }
       }
+    }
+    
+    private void updateNextPieceGrid() {
+         
     }
 
     private void UpdateGrid() {
@@ -85,7 +91,7 @@ namespace Quadris {
         Left = col * CELL_WIDTH
       };
     }
-
+    
     private void tmrFps_Tick(object sender, EventArgs e) {
       board.Update();
       UpdateGrid();
@@ -107,5 +113,10 @@ namespace Quadris {
           break;
       }
     }
-  }
+
+        private void panBoard_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+    }
 }
