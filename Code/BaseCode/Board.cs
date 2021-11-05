@@ -35,6 +35,7 @@ namespace Quadris {
   public class Board {
     public GridCellInfo[,] Grid { get; private set; }
     public Piece ActivePiece { get; set; }
+    public Piece nextPiece { get; set; }
 
     public Board() {
       Grid = new GridCellInfo[24, 10];
@@ -206,7 +207,8 @@ namespace Quadris {
           }
         }
       }
-      ActivePiece = Piece.GetRandPiece();
+      ActivePiece = nextPiece;
+      nextPiece = Piece.GetRandPiece();
     }
 
     public void CheckForLine() {
