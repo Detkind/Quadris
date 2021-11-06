@@ -4,6 +4,7 @@ namespace Quadris {
     EMPTY,
     OCCUPIED_PREVIOUSLY,
     OCCUPIED_ACTIVE_PIECE,
+    OCCUPIED_NEXT_PIECE,
     COLLISION
   }
 
@@ -30,12 +31,18 @@ namespace Quadris {
       State = CellState.OCCUPIED_ACTIVE_PIECE;
       Color = activePiece.Color;
     }
+
+    public void SetToNextPiece(Piece nextPiece) {
+      State = CellState.OCCUPIED_NEXT_PIECE;
+      Color = nextPiece.Color;
+    }
   }
 
   public class Board {
     public GridCellInfo[,] Grid { get; private set; }
     public Piece ActivePiece { get; set; }
-    public Piece nextPiece { get; set; }
+    //public NextPieceBoard nextPieceBoard;
+    //public Piece NextPiece { get; set; }
 
     public Board() {
       Grid = new GridCellInfo[24, 10];
@@ -44,20 +51,25 @@ namespace Quadris {
           Grid[i, j] = new GridCellInfo();
         }
       }
+      //nextPieceBoard = new NextPieceBoard();
+      //nextPieceBoard.NextPiece = Piece.GetRandPiece();
     }
 
     /// <summary>
     /// This method updates the grid and moves the active piece down
     /// </summary>
-    public void Update() {
+    public bool Update() {
+      bool settled = false;
       if (ActivePieceCanMove(MoveDir.DOWN)) {
         ActivePiece.MoveDown();
         RefreshGridWithActivePiece();
       }
       else {
+        settled = true;
         SettlePiece();
         CheckForLine();
       }
+      return settled;
     }
 
     private void RefreshGridWithActivePiece() {
@@ -207,8 +219,6 @@ namespace Quadris {
           }
         }
       }
-      ActivePiece = nextPiece;
-      nextPiece = Piece.GetRandPiece();
     }
 
     public void CheckForLine() {

@@ -19,7 +19,7 @@ namespace Quadris {
 	private Label[,] gridControls; //Creats the grid
     private Label[,] nextPieceGridControls;
 	private Board board; //Creates the board
-    private Board nextPieceBoard;
+    private NextPieceBoard nextPieceBoard;
 
     private SoundPlayer sndPlayer;
 
@@ -45,11 +45,11 @@ namespace Quadris {
 
     private void FrmMain_Load(object sender, EventArgs e) {
       board = new Board();
-      nextPieceBoard = new Board();
+      nextPieceBoard = new NextPieceBoard();
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
       Piece nextPiece = Piece.GetRandPiece();
-      board.nextPiece = nextPiece;
+      nextPieceBoard.NextPiece = nextPiece;
       CreateGrid();
       CreateNextPieceGrid();
       sndPlayer = new SoundPlayer(Resources.bg_music);
@@ -84,11 +84,11 @@ namespace Quadris {
       }
     }
     
-    private void UpdateNextPieceGrid() {
+    private void UpdateNextPiece() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
           GridCellInfo cellInfo = nextPieceBoard.Grid[row, col];
-          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
+          if (cellInfo.State == CellState.OCCUPIED_NEXT_PIECE) {
             nextPieceGridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
           else {
@@ -110,7 +110,6 @@ namespace Quadris {
           }
         }
       }
-      UpdateNextPieceGrid();
     }
 
     private Label MakeGridCell(int row, int col) {
@@ -125,8 +124,14 @@ namespace Quadris {
     }
     
     private void tmrFps_Tick(object sender, EventArgs e) {
-      board.Update();
+      bool settled = board.Update();
+      nextPieceBoard.Update();
+      if (settled) {
+        board.ActivePiece = nextPieceBoard.NextPiece;
+        nextPieceBoard.NextPiece = Piece.GetRandPiece();
+      }
       UpdateGrid();
+      UpdateNextPiece();
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
