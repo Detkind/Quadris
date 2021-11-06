@@ -51,8 +51,6 @@ namespace Quadris {
           Grid[i, j] = new GridCellInfo();
         }
       }
-      //nextPieceBoard = new NextPieceBoard();
-      //nextPieceBoard.NextPiece = Piece.GetRandPiece();
     }
 
     /// <summary>

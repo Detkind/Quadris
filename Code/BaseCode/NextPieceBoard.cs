@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿#pragma warning disable 1591
 namespace Quadris {
   public class NextPieceBoard {
     public GridCellInfo[,] Grid { get; private set; }
@@ -19,9 +14,6 @@ namespace Quadris {
     }
 
     public void Update() {
-      DisplayNextPiece();
-    }
-    private void DisplayNextPiece() {
       for (int r = 0; r < Grid.GetLength(0); r++) {
         for (int c = 0; c < Grid.GetLength(1); c++) {
           GridCellInfo cellInfo = Grid[r, c];
@@ -39,13 +31,12 @@ namespace Quadris {
         }
       }
     }
+
     public GridCellInfo GetCellInfo(int row, int col) {
       if (row < 0 || row >= Grid.GetLength(0) || col < 0 || col >= Grid.GetLength(1))
         return null;
       else
         return Grid[row, col];
     }
-
-
   }
 }

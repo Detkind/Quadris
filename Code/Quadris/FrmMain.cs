@@ -7,19 +7,19 @@ using System.Windows.Forms;
 
 namespace Quadris {
   public partial class FrmMain : Form {
-	private const int BOARD_COLS = 10;  //Sets the number of columns 
-	private const int BOARD_ROWS = 20;  //Sets the number of Rows
+	private const int BOARD_COLS = 10;  // number of columns for the main board
+	private const int BOARD_ROWS = 20;  // number of rows for the main board
 
-	private const int CELL_WIDTH = 20; //Creates the width of the entire grid
-	private const int CELL_HEIGHT = 20; // Creates the height of the entire Grid
+	private const int CELL_WIDTH = 20; // width of each individual cell
+	private const int CELL_HEIGHT = 20; // height of each individual cell
 
-    private const int NEXTPIECE_COLS = 4;
-    private const int NEXTPIECE_ROWS = 4;
+    private const int NEXTPIECE_COLS = 4; // number of columns for the next piece board
+    private const int NEXTPIECE_ROWS = 4; // number of rows for the next piece board
 
-	private Label[,] gridControls; //Creats the grid
-    private Label[,] nextPieceGridControls;
-	private Board board; //Creates the board
-    private NextPieceBoard nextPieceBoard;
+    private Label[,] gridControls; // main board grid which is displayed
+    private Label[,] nextPieceGridControls; // next piece grid which is displayed
+	private Board board; // main board
+    private NextPieceBoard nextPieceBoard; // next piece board
 
     private SoundPlayer sndPlayer;
 
@@ -44,12 +44,16 @@ namespace Quadris {
 	}
 
     private void FrmMain_Load(object sender, EventArgs e) {
+      // instantiate boards
       board = new Board();
       nextPieceBoard = new NextPieceBoard();
+      // get first piece and set it as main board's active piece
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
+      // get next piece and set it as the next piece board's next piece
       Piece nextPiece = Piece.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
+      // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();
       sndPlayer = new SoundPlayer(Resources.bg_music);
@@ -84,7 +88,7 @@ namespace Quadris {
       }
     }
     
-    private void UpdateNextPiece() {
+    private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
           GridCellInfo cellInfo = nextPieceBoard.Grid[row, col];
@@ -124,14 +128,16 @@ namespace Quadris {
     }
     
     private void tmrFps_Tick(object sender, EventArgs e) {
+      // update method in board returns a boolean value on whether a piece has been settled or not
       bool settled = board.Update();
       nextPieceBoard.Update();
+      // set active piece to next piece and create a new next piece once a piece has been settled
       if (settled) {
         board.ActivePiece = nextPieceBoard.NextPiece;
         nextPieceBoard.NextPiece = Piece.GetRandPiece();
       }
       UpdateGrid();
-      UpdateNextPiece();
+      UpdateNextPieceGrid();
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
