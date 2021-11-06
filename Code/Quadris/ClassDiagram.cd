@@ -11,7 +11,7 @@
   <Class Name="Quadris.FrmMain">
     <Position X="4" Y="1.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AEIAAAAAACAACEEAAICAAwACBgCAAAIAKAAIIQEAAAA=</HashCode>
+      <HashCode>AEIAAAAAACAACEEAAICAAwACBgSAAAIAKAAIIQEAAAA=</HashCode>
       <FileName>FrmMain.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -21,10 +21,6 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="Quadris.Code.Move">
-    <Position X="4" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
   </Class>
   <Class Name="Quadris.Properties.Resources">
     <Position X="7.5" Y="3.5" Width="1.75" />

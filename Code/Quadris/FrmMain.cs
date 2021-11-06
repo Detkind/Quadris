@@ -13,8 +13,13 @@ namespace Quadris {
 	private const int CELL_WIDTH = 20; //Creates the width of the entire grid
 	private const int CELL_HEIGHT = 20; // Creates the height of the entire Grid
 
+    private const int NEXTPIECE_COLS = 4;
+    private const int NEXTPIECE_ROWS = 4;
+
 	private Label[,] gridControls; //Creats the grid
+    private Label[,] nextPieceGridControls;
 	private Board board; //Creates the board
+    private Board nextPieceBoard;
 
     private SoundPlayer sndPlayer;
 
@@ -40,11 +45,13 @@ namespace Quadris {
 
     private void FrmMain_Load(object sender, EventArgs e) {
       board = new Board();
+      nextPieceBoard = new Board();
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
       Piece nextPiece = Piece.GetRandPiece();
       board.nextPiece = nextPiece;
       CreateGrid();
+      CreateNextPieceGrid();
       sndPlayer = new SoundPlayer(Resources.bg_music);
       sndPlayer.PlayLooping();
     }
@@ -62,9 +69,33 @@ namespace Quadris {
         }
       }
     }
+
+    private void CreateNextPieceGrid() {
+      panel1.Width = CELL_WIDTH * NEXTPIECE_COLS;
+      panel1.Height = CELL_HEIGHT * NEXTPIECE_ROWS;
+      nextPieceGridControls = new Label[NEXTPIECE_ROWS, NEXTPIECE_COLS];
+      panel1.Controls.Clear();
+      for (int col = 0; col < NEXTPIECE_COLS; col++) {
+        for (int row = 0; row < NEXTPIECE_ROWS; row++) {
+          Label lblCell = MakeGridCell(row, col);
+          panel1.Controls.Add(lblCell);
+          nextPieceGridControls[row, col] = lblCell;
+        }
+      }
+    }
     
-    private void updateNextPieceGrid() {
-         
+    private void UpdateNextPieceGrid() {
+      for (int col = 0; col < NEXTPIECE_COLS; col++) {
+        for (int row = 0; row < NEXTPIECE_ROWS; row++) {
+          GridCellInfo cellInfo = nextPieceBoard.Grid[row, col];
+          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
+            nextPieceGridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
+          }
+          else {
+            nextPieceGridControls[row, col].Image = null;
+          }
+        }
+      }
     }
 
     private void UpdateGrid() {
@@ -79,6 +110,7 @@ namespace Quadris {
           }
         }
       }
+      UpdateNextPieceGrid();
     }
 
     private Label MakeGridCell(int row, int col) {
