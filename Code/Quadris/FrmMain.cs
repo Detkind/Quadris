@@ -190,5 +190,13 @@ namespace Quadris {
     private void label1_Click_1(object sender, EventArgs e) {
 
     }
+
+    private void FrmMain_KeyUp(object sender, KeyEventArgs e) {
+      switch (e.KeyCode) {
+        case Keys.Down:
+          tmrFps.Interval = 200;
+          break;
+      }
+    }
   }
 }
