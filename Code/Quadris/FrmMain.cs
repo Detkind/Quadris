@@ -143,11 +143,20 @@ namespace Quadris {
       if (settled) {
         board.ActivePiece = nextPieceBoard.NextPiece;
         nextPieceBoard.NextPiece = Piece.GetRandPiece();
+        if (isGameOver()) {
+          tmrFps.Stop();
+          MessageBox.Show("Game Over");
+          Application.Restart();
+        }
       }
       UpdateGrid();
       UpdateNextPieceGrid();
       UpdateScore();
       UpdateLevel();
+    }
+
+    private bool isGameOver() {
+      return !board.ActivePieceCanMove(MoveDir.DOWN);
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
