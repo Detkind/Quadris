@@ -42,11 +42,10 @@ namespace Quadris {
   {
     public GridCellInfo[,] Grid { get; private set; }
     public Piece ActivePiece { get; set; }
-    //public NextPieceBoard nextPieceBoard;
-    //public Piece NextPiece { get; set; }
-    public int score = 0;
-    public int clearedrows = 0;
-    public int Level = 0;
+
+    public int Score = 0;
+    public int ClearedRows = 0;
+    public int Level = 1;
 
     public Board()
     {
@@ -275,7 +274,7 @@ namespace Quadris {
 
     public void CheckForLine()
     {
-      int fullrows = 0; 
+      int fullRows = 0; 
       for (int curRow = 0; curRow < Grid.GetLength(0); curRow++)
       {
         bool allFilled = true;
@@ -289,7 +288,7 @@ namespace Quadris {
         }
         if (allFilled)
         {
-          fullrows++; 
+          fullRows++;
           for (int col = 0; col < Grid.GetLength(1); col++)
           {
             for (int dropRow = curRow; dropRow > 0; dropRow--)
@@ -300,35 +299,39 @@ namespace Quadris {
           curRow--;
         }
       }
-      clearedrows += fullrows;
-      if (fullrows > 0)
-      {
-        Score(fullrows);
-      }
+      UpdateScore(fullRows);
     }
 
-    private void Score(int fullrows)
+    private void UpdateScore(int fullRows) {
+      ClearedRows += fullRows;
+      if (fullRows > 0) {
+        AddScore(fullRows);
+      }
+      bool isLevelUp = LvlUP();
+    }
+
+    private void AddScore(int fullrows)
     {
       switch (fullrows)
       {
         case 1:
-          score += 40 * (Level + 1);
+          Score += 40 * Level;
           break;
         case 2:
-          score += 100 * (Level + 1);
+          Score += 100 * Level;
           break;
         case 3:
-          score += 1200 * (Level + 1);
+          Score += 1200 * Level;
           break;
         default:
-          score += 1200 * (Level + 1);
+          Score += 1200 * Level;
           break;
       }
     }
 
     public bool LvlUP()
     {
-      if ((Level + 1) * 10 < clearedrows) {
+      if ((Level * 10) < ClearedRows) {
         Level++;
         return true; 
       }

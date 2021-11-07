@@ -126,6 +126,14 @@ namespace Quadris {
         Left = col * CELL_WIDTH
       };
     }
+
+    private void UpdateScore() {
+      lblScoreNum.Text = board.Score.ToString();
+    }
+
+    private void UpdateLevel() {
+      lblLevelNum.Text = board.Level.ToString();
+    }
     
     private void tmrFps_Tick(object sender, EventArgs e) {
       // update method in board returns a boolean value on whether a piece has been settled or not
@@ -138,6 +146,8 @@ namespace Quadris {
       }
       UpdateGrid();
       UpdateNextPieceGrid();
+      UpdateScore();
+      UpdateLevel();
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
@@ -161,14 +171,21 @@ namespace Quadris {
       }
     }
 
-        private void panBoard_Paint(object sender, PaintEventArgs e)
-        {
+    private void panBoard_Paint(object sender, PaintEventArgs e)
+    {
 
-        }
+    }
 
-	private void panel2_Paint(object sender, PaintEventArgs e)
-	{
-        
-	}
+    private void label1_Click(object sender, EventArgs e) {
+
+    }
+
+    private void lblNextPiece_Click(object sender, EventArgs e) {
+
+    }
+
+    private void label1_Click_1(object sender, EventArgs e) {
+
+    }
   }
 }
