@@ -121,6 +121,7 @@ namespace Quadris {
       if (CheckForOutOfBounds()) {
         ActivePiece.RotateLeft();
       }
+      RefreshGridWithActivePiece();
     }
 
     public void RotateActivePieceLeft() {
@@ -128,6 +129,7 @@ namespace Quadris {
       if (CheckForOutOfBounds()) {
         ActivePiece.RotateRight();
       }
+      RefreshGridWithActivePiece();
     }
 
     public bool ActivePieceCanMove(MoveDir moveDir) {
@@ -199,7 +201,7 @@ namespace Quadris {
         for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
           if (ActivePiece.Layout[r, c]) {
             GridCellInfo cellInfo = GetCellInfo(r + ActivePiece.GridRow, c + ActivePiece.GridCol);
-            if (cellInfo == null) {
+            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
               return true;
             }
           }

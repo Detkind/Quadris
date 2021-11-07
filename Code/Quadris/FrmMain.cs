@@ -56,8 +56,8 @@ namespace Quadris {
       // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();
-      sndPlayer = new SoundPlayer(Resources.bg_music);
-      sndPlayer.PlayLooping();
+      //sndPlayer = new SoundPlayer(Resources.bg_music);
+      //sndPlayer.PlayLooping();
     }
 
     private void CreateGrid() {
