@@ -1,6 +1,7 @@
 ﻿#pragma warning disable 1591
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace Quadris {
   public enum PieceType {
@@ -57,7 +58,11 @@ namespace Quadris {
         }
       }
     }
-
+    
+    /// <summary>
+    /// The GetRandPiece class takes the pieces and returns one of them at random. 
+    /// </summary>
+    /// <returns></returns>
     public static Piece GetRandPiece() {
       int pieceNum = rand.Next(Enum.GetValues(typeof(PieceType)).Length);
       return MakePiece((PieceType)pieceNum);
