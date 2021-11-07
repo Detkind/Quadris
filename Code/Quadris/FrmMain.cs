@@ -144,15 +144,19 @@ namespace Quadris {
       switch (e.KeyCode) {
         case Keys.X:
           board.RotateActivePieceRight();
+          UpdateGrid();
           break;
         case Keys.Z:
           board.RotateActivePieceLeft();
+          UpdateGrid();
           break;
         case Keys.Right:
           board.MoveActivePieceRight();
+          UpdateGrid();
           break;
         case Keys.Left:
           board.MoveActivePieceLeft();
+          UpdateGrid();
           break;
       }
     }
