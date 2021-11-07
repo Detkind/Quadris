@@ -47,7 +47,6 @@ namespace Quadris {
     public int ClearedRows = 0;
     public int Level = 1;
     public int LevelSpeed = 500;
-    public int TmpSpeed = 500;
 
     public Board()
     {
@@ -334,21 +333,22 @@ namespace Quadris {
 
     public bool LvlUP()
     {
-      if ((Level * 10) < ClearedRows) {
+      if ((Level * 10) < ClearedRows && Level < 10) {
         Level++;
+        LevelSpeed -= 40;
         return true; 
       }
       return false; 
     }
 
-    public void IncreaseSpeed(int i) {
-      if (TmpSpeed > 50)
-      {
-        LevelSpeed = TmpSpeed;
-      }
-      else {
-        LevelSpeed = 50; 
-      }
-    }
+//    public void IncreaseSpeed(int i) {
+//      if (TmpSpeed > 50)
+//      {
+//        LevelSpeed = TmpSpeed;
+//      }
+//      else {
+//        LevelSpeed = 50; 
+//     }
+//    }
   }
 }

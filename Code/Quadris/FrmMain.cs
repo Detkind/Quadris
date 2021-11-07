@@ -136,6 +136,7 @@ namespace Quadris {
     }
     
     private void tmrFps_Tick(object sender, EventArgs e) {
+      tmrFps.Interval = board.LevelSpeed;
       // update method in board returns a boolean value on whether a piece has been settled or not
       bool settled = board.Update();
       nextPieceBoard.Update();
@@ -178,7 +179,7 @@ namespace Quadris {
           UpdateGrid();
           break;
 		case Keys.Down:
-		  tmrFps.Interval = 100;
+		  tmrFps.Interval = 50;
           break;
       }
     }
