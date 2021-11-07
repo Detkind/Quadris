@@ -75,6 +75,7 @@ namespace Quadris {
       // lblScore
       // 
       this.lblScore.AutoSize = true;
+      this.lblScore.BackColor = System.Drawing.Color.Transparent;
       this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblScore.ForeColor = System.Drawing.Color.White;
       this.lblScore.Location = new System.Drawing.Point(240, 102);
@@ -88,6 +89,7 @@ namespace Quadris {
       // lblScoreNum
       // 
       this.lblScoreNum.AutoSize = true;
+      this.lblScoreNum.BackColor = System.Drawing.Color.Transparent;
       this.lblScoreNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblScoreNum.ForeColor = System.Drawing.Color.White;
       this.lblScoreNum.Location = new System.Drawing.Point(323, 102);
@@ -100,9 +102,10 @@ namespace Quadris {
       // lblLevel
       // 
       this.lblLevel.AutoSize = true;
+      this.lblLevel.BackColor = System.Drawing.Color.Transparent;
       this.lblLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblLevel.ForeColor = System.Drawing.Color.White;
-      this.lblLevel.Location = new System.Drawing.Point(246, 539);
+      this.lblLevel.Location = new System.Drawing.Point(246, 541);
       this.lblLevel.Name = "lblLevel";
       this.lblLevel.Size = new System.Drawing.Size(94, 31);
       this.lblLevel.TabIndex = 6;
@@ -111,9 +114,10 @@ namespace Quadris {
       // lblLevelNum
       // 
       this.lblLevelNum.AutoSize = true;
+      this.lblLevelNum.BackColor = System.Drawing.Color.Transparent;
       this.lblLevelNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblLevelNum.ForeColor = System.Drawing.Color.White;
-      this.lblLevelNum.Location = new System.Drawing.Point(323, 539);
+      this.lblLevelNum.Location = new System.Drawing.Point(323, 541);
       this.lblLevelNum.Name = "lblLevelNum";
       this.lblLevelNum.Size = new System.Drawing.Size(29, 31);
       this.lblLevelNum.TabIndex = 7;

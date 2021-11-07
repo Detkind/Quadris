@@ -295,6 +295,7 @@ namespace Quadris {
             {
               Grid[dropRow, col] = Grid[dropRow - 1, col];
             }
+            Grid[0, col] = new GridCellInfo();
           }
           curRow--;
         }
