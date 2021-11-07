@@ -42,10 +42,20 @@ namespace Quadris {
   {
     public GridCellInfo[,] Grid { get; private set; }
     public Piece ActivePiece { get; set; }
+<<<<<<< HEAD
 
     public int Score = 0;
     public int ClearedRows = 0;
     public int Level = 1;
+=======
+    //public NextPieceBoard nextPieceBoard;
+    //public Piece NextPiece { get; set; }
+    public int score = 0;
+    public int clearedrows = 0;
+    public int Level = 0;
+    public int levelspeed = 500;
+    public int tmpspeed = 500; 
+>>>>>>> origin
 
     public Board()
     {
@@ -337,6 +347,16 @@ namespace Quadris {
         return true; 
       }
       return false; 
+    }
+
+    public void increasespeed(int i) {
+      if (tmpspeed > 50)
+      {
+        levelspeed = tmpspeed;
+      }
+      else {
+        levelspeed = 50; 
+      }
     }
   }
 }
