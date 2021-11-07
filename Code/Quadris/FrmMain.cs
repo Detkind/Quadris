@@ -141,7 +141,7 @@ namespace Quadris {
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
-      switch (e.KeyCode) {
+	  switch (e.KeyCode) {
         case Keys.X:
           board.RotateActivePieceRight();
           UpdateGrid();
@@ -157,6 +157,9 @@ namespace Quadris {
         case Keys.Left:
           board.MoveActivePieceLeft();
           UpdateGrid();
+          break;
+		case Keys.Down:
+		  tmrFps.Interval = 100;
           break;
       }
     }

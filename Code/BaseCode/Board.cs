@@ -47,6 +47,8 @@ namespace Quadris {
     public int score = 0;
     public int clearedrows = 0;
     public int Level = 0;
+    public int levelspeed = 500;
+    public int tmpspeed = 500; 
 
     public Board()
     {
@@ -333,6 +335,16 @@ namespace Quadris {
         return true; 
       }
       return false; 
+    }
+
+    public void increasespeed(int i) {
+      if (tmpspeed > 50)
+      {
+        levelspeed = tmpspeed;
+      }
+      else {
+        levelspeed = 50; 
+      }
     }
   }
 }
