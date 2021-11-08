@@ -53,6 +53,7 @@ namespace Quadris {
       // get next piece and set it as the next piece board's next piece
       Piece nextPiece = Piece.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
+      ShadowPiece shadow = ShadowPiece.GetPiece();
       // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();

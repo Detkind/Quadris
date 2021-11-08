@@ -49,7 +49,7 @@ namespace Quadris {
       // tmrFps
       // 
       this.tmrFps.Enabled = true;
-      this.tmrFps.Interval = 200;
+      this.tmrFps.Interval = 500;
       this.tmrFps.Tick += new System.EventHandler(this.tmrFps_Tick);
       // 
       // panel1

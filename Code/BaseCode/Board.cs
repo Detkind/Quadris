@@ -5,7 +5,8 @@ namespace Quadris {
     OCCUPIED_PREVIOUSLY,
     OCCUPIED_ACTIVE_PIECE,
     OCCUPIED_NEXT_PIECE,
-    COLLISION
+    COLLISION, 
+    SHADOW
   }
 
   public enum MoveDir {
@@ -27,6 +28,9 @@ namespace Quadris {
       State = CellState.EMPTY;
     }
 
+    public void SetShadowPiece(Piece activePiece) {
+      State = CellState.SHADOW;
+    } 
     public void SetToActivePiece(Piece activePiece) {
       State = CellState.OCCUPIED_ACTIVE_PIECE;
       Color = activePiece.Color;
@@ -41,6 +45,7 @@ namespace Quadris {
   public class Board
   {
     public GridCellInfo[,] Grid { get; private set; }
+    public GridCellInfo[,] Grid2 { get; private set; }
     public Piece ActivePiece { get; set; }
 
     public int Score = 0;
@@ -276,7 +281,7 @@ namespace Quadris {
 
     public void CheckForLine()
     {
-      int fullRows = 0; 
+      int fullRows = 0;
       for (int curRow = 0; curRow < Grid.GetLength(0); curRow++)
       {
         bool allFilled = true;
@@ -336,9 +341,9 @@ namespace Quadris {
     {
       if ((Level * 10) < ClearedRows) {
         Level++;
-        return true; 
+        return true;
       }
-      return false; 
+      return false;
     }
 
     public void IncreaseSpeed(int i) {
@@ -347,7 +352,7 @@ namespace Quadris {
         LevelSpeed = TmpSpeed;
       }
       else {
-        LevelSpeed = 50; 
+        LevelSpeed = 50;
       }
     }
   }
