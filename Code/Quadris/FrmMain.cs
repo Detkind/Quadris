@@ -16,6 +16,9 @@ namespace Quadris {
     private const int NEXTPIECE_COLS = 4; // number of columns for the next piece board
     private const int NEXTPIECE_ROWS = 4; // number of rows for the next piece board
 
+    private const int SHADOWPIECE_COLS = 4;
+    private const int SHADOWPIECE_ROWS = 4; 
+
     private Label[,] gridControls; // main board grid which is displayed
     private Label[,] nextPieceGridControls; // next piece grid which is displayed
 	private Board board; // main board
@@ -53,7 +56,6 @@ namespace Quadris {
       // get next piece and set it as the next piece board's next piece
       Piece nextPiece = Piece.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
-      ShadowPiece shadow = ShadowPiece.GetPiece();
       // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();
