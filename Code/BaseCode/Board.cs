@@ -75,15 +75,15 @@ namespace Quadris {
 	public bool Update()
     {
       ShadowPiece.GridRow = 0;
-	  while (ShadowPieceCanMove())
-	  {
-        ShadowPiece.MoveDown();
-        RefreshGridWithShadowPiece();
-	  }
 
       bool settled = false;
       if (ActivePieceCanMove(MoveDir.DOWN))
       {
+        while (ShadowPieceCanMove())
+        {
+          ShadowPiece.MoveDown();
+          RefreshGridWithShadowPiece();
+        }
         ActivePiece.MoveDown();
         RefreshGridWithActivePiece();
       }
