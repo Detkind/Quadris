@@ -16,9 +16,6 @@ namespace Quadris {
     private const int NEXTPIECE_COLS = 4; // number of columns for the next piece board
     private const int NEXTPIECE_ROWS = 4; // number of rows for the next piece board
 
-    private const int SHADOWPIECE_COLS = 4;
-    private const int SHADOWPIECE_ROWS = 4; 
-
     private Label[,] gridControls; // main board grid which is displayed
     private Label[,] nextPieceGridControls; // next piece grid which is displayed
 	private Board board; // main board
@@ -53,6 +50,7 @@ namespace Quadris {
       // get first piece and set it as main board's active piece
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
+      board.ShadowPiece = piece;
       // get next piece and set it as the next piece board's next piece
       Piece nextPiece = Piece.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
@@ -109,7 +107,7 @@ namespace Quadris {
       for (int col = 0; col < BOARD_COLS; col++) {
         for (int row = 0; row < BOARD_ROWS; row++) {
           GridCellInfo cellInfo = board.Grid[row + 4, col];
-          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
+          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY || cellInfo.State == CellState.OCCUPIED_SHADOW_PIECE) {
             gridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
           else {

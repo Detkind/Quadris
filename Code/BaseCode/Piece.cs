@@ -31,7 +31,8 @@ namespace Quadris {
     DARK
   }
 
-  public class Piece {
+  public class Piece
+  {
     private const int LAYOUT_ROWS = 4;
     private const int LAYOUT_COLS = 4;
 
@@ -40,37 +41,46 @@ namespace Quadris {
     public bool[,] Layout { get; private set; }
     public int GridRow { get; set; }
     public int GridCol { get; set; }
+    public int GridShadowRow { get; set; }
+    public int GridShadowCol { get; set; }
     public PieceType Type { get; private set; }
     public PieceColor Color { get; private set; }
 
-    static Piece() {
+    static Piece()
+    {
       rand = new Random();
     }
 
-    public Piece(string strLayout, PieceColor color) {
+    public Piece(string strLayout, PieceColor color)
+    {
       GridRow = 0;
       GridCol = 3;
       Color = color;
       Layout = new bool[LAYOUT_ROWS, LAYOUT_COLS];
-      for (int c = 0; c < LAYOUT_COLS; c++) {
-        for (int r = 0; r < LAYOUT_ROWS; r++) {
+      for (int c = 0; c < LAYOUT_COLS; c++)
+      {
+        for (int r = 0; r < LAYOUT_ROWS; r++)
+        {
           Layout[r, c] = (strLayout[r * LAYOUT_COLS + c] == '1');
         }
       }
     }
-    
+
     /// <summary>
     /// The GetRandPiece class takes the pieces and returns one of them at random. 
     /// </summary>
     /// <returns></returns>
-    public static Piece GetRandPiece() {
+    public static Piece GetRandPiece()
+    {
       int pieceNum = rand.Next(Enum.GetValues(typeof(PieceType)).Length);
       return MakePiece((PieceType)pieceNum);
     }
 
-    public static Piece MakePiece(PieceType type) {
+    public static Piece MakePiece(PieceType type)
+    {
       Piece piece = null;
-      switch (type) {
+      switch (type)
+      {
         case PieceType.L: piece = new Piece("0000010001000110", PieceColor.ORANGE); break;
         case PieceType.J: piece = new Piece("0000001000100110", PieceColor.BLUE); break;
         case PieceType.Z: piece = new Piece("0000011000110000", PieceColor.RED); break;
@@ -82,7 +92,8 @@ namespace Quadris {
       return piece;
     }
 
-    public void RotateRight() {
+    public void RotateRight()
+    {
       bool[] read = Layout.Cast<bool>().ToArray();
       bool[] write = new bool[read.Length];
 
@@ -103,14 +114,17 @@ namespace Quadris {
       write[14] = read[7];
       write[15] = read[3];
 
-      for (int r = 0; r < Layout.GetLength(0); r++) {
-        for (int c = 0; c < Layout.GetLength(1); c++) {
+      for (int r = 0; r < Layout.GetLength(0); r++)
+      {
+        for (int c = 0; c < Layout.GetLength(1); c++)
+        {
           Layout[r, c] = write[r * Layout.GetLength(1) + c];
         }
       }
     }
 
-    public void RotateLeft() {
+    public void RotateLeft()
+    {
       bool[] read = Layout.Cast<bool>().ToArray();
       bool[] write = new bool[read.Length];
 
@@ -131,23 +145,34 @@ namespace Quadris {
       write[14] = read[8];
       write[15] = read[12];
 
-      for (int r = 0; r < Layout.GetLength(0); r++) {
-        for (int c = 0; c < Layout.GetLength(1); c++) {
+      for (int r = 0; r < Layout.GetLength(0); r++)
+      {
+        for (int c = 0; c < Layout.GetLength(1); c++)
+        {
           Layout[r, c] = write[r * Layout.GetLength(1) + c];
         }
       }
     }
 
-    public void MoveDown() {
+    public void MoveShadowDown()
+    {
+      GridShadowRow--;
+    }
+    public void MoveDown()
+    {
       GridRow++;
     }
 
-    public void MoveLeft() {
+    public void MoveLeft()
+    {
       GridCol--;
+      GridShadowCol--;
     }
-    
-    public void MoveRight() {
-      GridCol++;
-    }
+
+    public void MoveRight()
+	{
+	  GridCol++;
+      GridShadowRow++;
+	}
   }
 }
