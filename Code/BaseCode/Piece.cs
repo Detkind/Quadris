@@ -41,8 +41,6 @@ namespace Quadris {
     public bool[,] Layout { get; private set; }
     public int GridRow { get; set; }
     public int GridCol { get; set; }
-    public int GridShadowRow { get; set; }
-    public int GridShadowCol { get; set; }
     public PieceType Type { get; private set; }
     public PieceColor Color { get; private set; }
 
@@ -51,11 +49,12 @@ namespace Quadris {
       rand = new Random();
     }
 
-    public Piece(string strLayout, PieceColor color)
+    public Piece(string strLayout, PieceColor color, PieceType type)
     {
       GridRow = 0;
       GridCol = 3;
       Color = color;
+      Type = type;
       Layout = new bool[LAYOUT_ROWS, LAYOUT_COLS];
       for (int c = 0; c < LAYOUT_COLS; c++)
       {
@@ -81,15 +80,19 @@ namespace Quadris {
       Piece piece = null;
       switch (type)
       {
-        case PieceType.L: piece = new Piece("0000010001000110", PieceColor.ORANGE); break;
-        case PieceType.J: piece = new Piece("0000001000100110", PieceColor.BLUE); break;
-        case PieceType.Z: piece = new Piece("0000011000110000", PieceColor.RED); break;
-        case PieceType.S: piece = new Piece("0000011011000000", PieceColor.GREEN); break;
-        case PieceType.I: piece = new Piece("0010001000100010", PieceColor.CYAN); break;
-        case PieceType.T: piece = new Piece("0000001001110000", PieceColor.PURPLE); break;
-        case PieceType.O: piece = new Piece("0000011001100000", PieceColor.YELLOW); break;
+        case PieceType.L: piece = new Piece("0000010001000110", PieceColor.ORANGE, PieceType.L); break;
+        case PieceType.J: piece = new Piece("0000001000100110", PieceColor.BLUE, PieceType.J); break;
+        case PieceType.Z: piece = new Piece("0000011000110000", PieceColor.RED, PieceType.Z); break;
+        case PieceType.S: piece = new Piece("0000011011000000", PieceColor.GREEN, PieceType.S); break;
+        case PieceType.I: piece = new Piece("0010001000100010", PieceColor.CYAN, PieceType.I); break;
+        case PieceType.T: piece = new Piece("0000001001110000", PieceColor.PURPLE, PieceType.T); break;
+        case PieceType.O: piece = new Piece("0000011001100000", PieceColor.YELLOW, PieceType.O); break;
       }
       return piece;
+    }
+
+    public static Piece CopyPiece(Piece piece) {
+      return MakePiece(piece.Type);
     }
 
     public void RotateRight()
@@ -154,10 +157,7 @@ namespace Quadris {
       }
     }
 
-    public void MoveShadowDown()
-    {
-      GridShadowRow--;
-    }
+
     public void MoveDown()
     {
       GridRow++;
@@ -166,13 +166,11 @@ namespace Quadris {
     public void MoveLeft()
     {
       GridCol--;
-      GridShadowCol--;
     }
 
     public void MoveRight()
 	{
-	  GridCol++;
-      GridShadowRow++;
+      GridCol++;
 	}
   }
 }

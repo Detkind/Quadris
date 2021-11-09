@@ -29,9 +29,6 @@ namespace Quadris {
       State = CellState.EMPTY;
     }
 
-    public void SetShadowPiece(Piece activePiece) {
-      State = CellState.SHADOW;
-    } 
     public void SetToActivePiece(Piece activePiece) {
       State = CellState.OCCUPIED_ACTIVE_PIECE;
       Color = activePiece.Color;
@@ -51,7 +48,6 @@ namespace Quadris {
   public class Board
   {
     public GridCellInfo[,] Grid { get; private set; }
-    public GridCellInfo[,] Grid2 { get; private set; }
     public Piece ActivePiece { get; set; }
     public Piece ShadowPiece { get; set; }
 
@@ -78,12 +74,12 @@ namespace Quadris {
     /// 
 	public bool Update()
     {
+      ShadowPiece.GridRow = 0;
 	  while (ShadowPieceCanMove())
 	  {
-        ShadowPiece.MoveShadowDown();
+        ShadowPiece.MoveDown();
         RefreshGridWithShadowPiece();
 	  }
-      RefreshGridWithShadowPiece();
 
       bool settled = false;
       if (ActivePieceCanMove(MoveDir.DOWN))
@@ -119,7 +115,7 @@ namespace Quadris {
         {
           if (ShadowPiece.Layout[r, c])
           {
-            GridCellInfo cellInfo = GetCellInfo(r + ShadowPiece.GridShadowRow, c + ShadowPiece.GridShadowCol);
+            GridCellInfo cellInfo = GetCellInfo(r + ShadowPiece.GridRow, c + ShadowPiece.GridCol);
             cellInfo?.SetToShadowPiece(ShadowPiece);
           }
         }
@@ -170,7 +166,9 @@ namespace Quadris {
       if (ActivePieceCanMove(MoveDir.LEFT))
       {
         ActivePiece.MoveLeft();
+        ShadowPiece.MoveLeft();
         RefreshGridWithActivePiece();
+        RefreshGridWithShadowPiece();
       }
     }
 
@@ -179,7 +177,9 @@ namespace Quadris {
       if (ActivePieceCanMove(MoveDir.RIGHT))
       {
         ActivePiece.MoveRight();
+        ShadowPiece.MoveRight();
         RefreshGridWithActivePiece();
+        RefreshGridWithShadowPiece();
       }
     }
 
@@ -221,7 +221,7 @@ namespace Quadris {
             {
               continue;
             }
-            GridCellInfo cellInfo = GetCellInfo(ShadowPiece.GridShadowRow + lastRow + 1, ShadowPiece.GridShadowCol + c);
+            GridCellInfo cellInfo = GetCellInfo(ShadowPiece.GridRow + lastRow + 1, ShadowPiece.GridCol + c);
             System.Diagnostics.Debug.WriteLine(cellInfo);
 
             if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
@@ -229,7 +229,6 @@ namespace Quadris {
               canMove = false;
               break;
             }
-            break;
           }
       return canMove;
     }
