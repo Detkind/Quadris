@@ -74,16 +74,11 @@ namespace Quadris {
     /// 
 	public bool Update()
     {
-      ShadowPiece.GridRow = 0;
-	  while (ShadowPieceCanMove())
-	  {
-        ShadowPiece.MoveDown();
-        RefreshGridWithShadowPiece();
-	  }
 
       bool settled = false;
       if (ActivePieceCanMove(MoveDir.DOWN))
       {
+        UpdateShadow();
         ActivePiece.MoveDown();
         RefreshGridWithActivePiece();
       }
@@ -94,6 +89,14 @@ namespace Quadris {
         CheckForLine();
       }
       return settled;
+    }
+
+    public void UpdateShadow() {
+      ShadowPiece.GridRow = 0;
+      while (ShadowPieceCanMove()) {
+        ShadowPiece.MoveDown();
+        RefreshGridWithShadowPiece();
+      }
     }
 
     private void RefreshGridWithShadowPiece()
@@ -167,8 +170,8 @@ namespace Quadris {
       {
         ActivePiece.MoveLeft();
         ShadowPiece.MoveLeft();
+        UpdateShadow();
         RefreshGridWithActivePiece();
-        RefreshGridWithShadowPiece();
       }
     }
 
@@ -178,28 +181,34 @@ namespace Quadris {
       {
         ActivePiece.MoveRight();
         ShadowPiece.MoveRight();
+        UpdateShadow();
         RefreshGridWithActivePiece();
-        RefreshGridWithShadowPiece();
       }
     }
 
     public void RotateActivePieceRight()
     {
       ActivePiece.RotateRight();
+      ShadowPiece.RotateRight();
       if (CheckForOutOfBounds())
       {
         ActivePiece.RotateLeft();
+        ShadowPiece.RotateLeft();
       }
+      UpdateShadow();
       RefreshGridWithActivePiece();
     }
 
     public void RotateActivePieceLeft()
     {
       ActivePiece.RotateLeft();
+      ShadowPiece.RotateLeft();
       if (CheckForOutOfBounds())
       {
         ActivePiece.RotateRight();
+        ShadowPiece.RotateRight();
       }
+      UpdateShadow();
       RefreshGridWithActivePiece();
     }
 
