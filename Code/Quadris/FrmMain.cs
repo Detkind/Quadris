@@ -150,7 +150,9 @@ namespace Quadris {
         if (IsGameOver()) {
           tmrFps.Stop();
           MessageBox.Show("Game Over");
-          Application.Restart();
+          this.Hide();
+          FormMenu formMenu = new FormMenu();
+          formMenu.Show();
         }
       }
       UpdateGrid();
