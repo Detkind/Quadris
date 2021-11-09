@@ -18,17 +18,18 @@ namespace Quadris {
     NONE,
     BLUE,
     RED,
-    WHITE,
     CYAN,
     GREEN,
-    MAGENTA,
     ORANGE,
     PURPLE,
     YELLOW,
-    FIRE,
-    ICE,
-    GROUND,
-    DARK
+    SHADOW_BLUE,
+    SHADOW_RED,
+    SHADOW_CYAN,
+    SHADOW_GREEN,
+    SHADOW_ORANGE,
+    SHADOW_PURPLE,
+    SHADOW_YELLOW
   }
 
   public class Piece
@@ -91,8 +92,18 @@ namespace Quadris {
       return piece;
     }
 
-    public static Piece CopyPiece(Piece piece) {
-      return MakePiece(piece.Type);
+    public static Piece MakeShadowPieceCopy(Piece piece) {
+      Piece shadowPiece = null;
+      switch (piece.Type) {
+        case PieceType.L: shadowPiece = new Piece("0000010001000110", PieceColor.SHADOW_ORANGE, PieceType.L); break;
+        case PieceType.J: shadowPiece = new Piece("0000001000100110", PieceColor.SHADOW_BLUE, PieceType.J); break;
+        case PieceType.Z: shadowPiece = new Piece("0000011000110000", PieceColor.SHADOW_RED, PieceType.Z); break;
+        case PieceType.S: shadowPiece = new Piece("0000011011000000", PieceColor.SHADOW_GREEN, PieceType.S); break;
+        case PieceType.I: shadowPiece = new Piece("0010001000100010", PieceColor.SHADOW_CYAN, PieceType.I); break;
+        case PieceType.T: shadowPiece = new Piece("0000001001110000", PieceColor.SHADOW_PURPLE, PieceType.T); break;
+        case PieceType.O: shadowPiece = new Piece("0000011001100000", PieceColor.SHADOW_YELLOW, PieceType.O); break;
+      }
+      return shadowPiece;
     }
 
     public void RotateRight()

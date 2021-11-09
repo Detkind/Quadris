@@ -82,9 +82,29 @@ namespace Quadris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cell_blue_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_blue_shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cell_cyan {
             get {
                 object obj = ResourceManager.GetObject("cell_cyan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cell_cyan_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_cyan_shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -115,6 +135,16 @@ namespace Quadris.Properties {
         internal static System.Drawing.Bitmap cell_green {
             get {
                 object obj = ResourceManager.GetObject("cell_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cell_green_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_green_shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -162,6 +192,16 @@ namespace Quadris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cell_orange_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_orange_shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cell_purple {
             get {
                 object obj = ResourceManager.GetObject("cell_purple", resourceCulture);
@@ -172,9 +212,29 @@ namespace Quadris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cell_purple_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_purple_shadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cell_red {
             get {
                 object obj = ResourceManager.GetObject("cell_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cell_red_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_red_shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -195,6 +255,16 @@ namespace Quadris.Properties {
         internal static System.Drawing.Bitmap cell_yellow {
             get {
                 object obj = ResourceManager.GetObject("cell_yellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cell_yellow_shadow {
+            get {
+                object obj = ResourceManager.GetObject("cell_yellow_shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

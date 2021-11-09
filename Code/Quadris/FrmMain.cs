@@ -27,16 +27,17 @@ namespace Quadris {
 	  {PieceColor.BLUE, Resources.cell_blue},
 	  {PieceColor.CYAN, Resources.cell_cyan},
 	  {PieceColor.GREEN, Resources.cell_green},
-	  {PieceColor.MAGENTA, Resources.cell_magenta},
 	  {PieceColor.ORANGE, Resources.cell_orange},
 	  {PieceColor.PURPLE, Resources.cell_purple},
 	  {PieceColor.RED, Resources.cell_red},
-	  {PieceColor.WHITE, Resources.cell_white},
 	  {PieceColor.YELLOW, Resources.cell_yellow},
-	  {PieceColor.FIRE, Resources.cell_fire},
-	  {PieceColor.ICE, Resources.cell_ice},
-	  {PieceColor.GROUND, Resources.cell_ground},
-	  {PieceColor.DARK, Resources.cell_dark},
+      {PieceColor.SHADOW_BLUE, Resources.cell_blue_shadow},
+	  {PieceColor.SHADOW_CYAN, Resources.cell_cyan_shadow},
+	  {PieceColor.SHADOW_GREEN, Resources.cell_green_shadow},
+	  {PieceColor.SHADOW_ORANGE, Resources.cell_orange_shadow},
+	  {PieceColor.SHADOW_PURPLE, Resources.cell_purple_shadow},
+	  {PieceColor.SHADOW_RED, Resources.cell_red_shadow},
+	  {PieceColor.SHADOW_YELLOW, Resources.cell_yellow_shadow}
 	};
 
 	public FrmMain() {
@@ -50,7 +51,7 @@ namespace Quadris {
       // get first piece and set it as main board's active piece
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
-      board.ShadowPiece = Piece.CopyPiece(piece);
+      board.ShadowPiece = Piece.MakeShadowPieceCopy(piece);
       // get next piece and set it as the next piece board's next piece
       Piece nextPiece = Piece.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
@@ -107,7 +108,6 @@ namespace Quadris {
       for (int col = 0; col < BOARD_COLS; col++) {
         for (int row = 0; row < BOARD_ROWS; row++) {
           GridCellInfo cellInfo = board.Grid[row + 4, col];
-          // System.Diagnostics.Debug.WriteLine(cellInfo.State);
           if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY || cellInfo.State == CellState.OCCUPIED_SHADOW_PIECE) {
             gridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
@@ -145,9 +145,9 @@ namespace Quadris {
       // set active piece to next piece and create a new next piece once a piece has been settled
       if (settled) {
         board.ActivePiece = nextPieceBoard.NextPiece;
-        board.ShadowPiece = Piece.CopyPiece(nextPieceBoard.NextPiece);
+        board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
         nextPieceBoard.NextPiece = Piece.GetRandPiece();
-        if (isGameOver()) {
+        if (IsGameOver()) {
           tmrFps.Stop();
           MessageBox.Show("Game Over");
           Application.Restart();
@@ -159,7 +159,7 @@ namespace Quadris {
       UpdateLevel();
     }
 
-    private bool isGameOver() {
+    private bool IsGameOver() {
       return !board.ActivePieceCanMove(MoveDir.DOWN);
     }
 
