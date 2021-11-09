@@ -141,28 +141,27 @@ namespace Quadris {
       tmrFps.Interval = board.LevelSpeed;
       // update method in board returns a boolean value on whether a piece has been settled or not
       bool settled = board.Update();
+
+      if (board.GameOver) {
+        tmrFps.Stop();
+        MessageBox.Show("Game Over");
+        this.Hide();
+        FormMenu formMenu = new FormMenu();
+        formMenu.Show();
+      }
+
       nextPieceBoard.Update();
-      // set active piece to next piece and create a new next piece once a piece has been settled
+
+      // set active piece to next piece and create new shadow piece and new next piece once a piece has been settled
       if (settled) {
         board.ActivePiece = nextPieceBoard.NextPiece;
         board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
         nextPieceBoard.NextPiece = Piece.GetRandPiece();
-        if (IsGameOver()) {
-          tmrFps.Stop();
-          MessageBox.Show("Game Over");
-          this.Hide();
-          FormMenu formMenu = new FormMenu();
-          formMenu.Show();
-        }
       }
       UpdateGrid();
       UpdateNextPieceGrid();
       UpdateScore();
       UpdateLevel();
-    }
-
-    private bool IsGameOver() {
-      return !board.ActivePieceCanMove(MoveDir.DOWN);
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
