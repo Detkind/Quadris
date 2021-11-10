@@ -136,56 +136,78 @@ namespace Quadris {
     private void UpdateLevel() {
       lblLevelNum.Text = board.Level.ToString();
     }
-    
-    private void tmrFps_Tick(object sender, EventArgs e) {
-      tmrFps.Interval = board.LevelSpeed;
-      // update method in board returns a boolean value on whether a piece has been settled or not
-      bool settled = board.Update();
 
-      if (board.GameOver) {
-        tmrFps.Stop();
-        MessageBox.Show("Game Over");
-        this.Hide();
-        FormMenu formMenu = new FormMenu();
-        formMenu.Show();
-      }
+    private void tmrFps_Tick(object sender, EventArgs e)
+    {
 
-      nextPieceBoard.Update();
+        if (!board.Paused)
+        {
+            tmrFps.Interval = board.LevelSpeed;
+            // update method in board returns a boolean value on whether a piece has been settled or not
+            bool settled = board.Update();
 
-      // set active piece to next piece and create new shadow piece and new next piece once a piece has been settled
-      if (settled) {
-        board.ActivePiece = nextPieceBoard.NextPiece;
-        board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
-        nextPieceBoard.NextPiece = Piece.GetRandPiece();
-      }
-      UpdateGrid();
-      UpdateNextPieceGrid();
-      UpdateScore();
-      UpdateLevel();
+            if (board.GameOver)
+            {
+                tmrFps.Stop();
+                MessageBox.Show("Game Over");
+                this.Hide();
+                FormMenu formMenu = new FormMenu();
+                formMenu.Show();
+            }
+
+            nextPieceBoard.Update();
+
+            // set active piece to next piece and create new shadow piece and new next piece once a piece has been settled
+            if (settled)
+            {
+                board.ActivePiece = nextPieceBoard.NextPiece;
+                board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
+                nextPieceBoard.NextPiece = Piece.GetRandPiece();
+            }
+            UpdateGrid();
+            UpdateNextPieceGrid();
+            UpdateScore();
+            UpdateLevel();
+        }
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
 	  switch (e.KeyCode) {
         case Keys.X:
-          board.RotateActivePieceRight();
-          UpdateGrid();
+          if (!board.Paused)
+          {
+            board.RotateActivePieceRight();
+            UpdateGrid();
+          }
           break;
         case Keys.Z:
-          board.RotateActivePieceLeft();
-          UpdateGrid();
+            if (!board.Paused)
+            {
+                board.RotateActivePieceLeft();
+                UpdateGrid();
+            }
           break;
         case Keys.Right:
-          board.MoveActivePieceRight();
-          UpdateGrid();
+            if (!board.Paused)
+            {
+                board.MoveActivePieceRight();
+                UpdateGrid();
+            }
           break;
         case Keys.Left:
-          board.MoveActivePieceLeft();
-          UpdateGrid();
+          if (!board.Paused)
+          {
+            board.MoveActivePieceLeft();
+            UpdateGrid();
+          }
           break;
 		case Keys.Down:
 		  tmrFps.Interval = 50;
           break;
-      }
+        case Keys.Tab:
+          board.ChangePause();
+          break;
+            }
     }
 
     private void panBoard_Paint(object sender, PaintEventArgs e)
