@@ -226,5 +226,20 @@ namespace Quadris {
     private void FrmMain_KeyUp(object sender, KeyEventArgs e) {
 
     }
-  }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_3(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

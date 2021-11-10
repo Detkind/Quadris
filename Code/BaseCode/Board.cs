@@ -64,8 +64,7 @@ namespace Quadris {
     public bool GameOver = false;
     public bool Paused = false;
 
-    public Board()
-    {
+    public Board() {
       Grid = new GridCellInfo[24, 10];
       for (int i = 0; i < Grid.GetLength(0); i++) {
         for (int j = 0; j < Grid.GetLength(1); j++) {
@@ -87,8 +86,7 @@ namespace Quadris {
       }
       else {
         GameOver = IsGameOver();
-        if (GameOver)
-        {
+        if (GameOver) {
             return true;
         }
         settled = true;
