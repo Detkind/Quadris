@@ -56,6 +56,7 @@ namespace Quadris {
     public int Level = 1;
     public int LevelSpeed = 500;
     public bool GameOver = false;
+    public bool Paused = false;
 
     public Board()
     {
@@ -69,31 +70,33 @@ namespace Quadris {
       }
     }
 
-    /// <summary>
-    /// This method updates the grid and moves the active piece down
-    /// </summary>
-    /// 
-	public bool Update()
+        /// <summary>
+        /// This method updates the grid and moves the active piece down
+        /// </summary>
+        /// 
+    public bool Update()
     {
 
-      bool settled = false;
-      if (ActivePieceCanMove(MoveDir.DOWN))
-      {
-        UpdateShadow();
-        ActivePiece.MoveDown();
-        RefreshGridWithActivePiece();
-      }
-      else
-      {
-        GameOver = IsGameOver();
-        if (GameOver) {
-          return true;
+        
+        bool settled = false;
+        if (ActivePieceCanMove(MoveDir.DOWN))
+        {
+            UpdateShadow();
+            ActivePiece.MoveDown();
+            RefreshGridWithActivePiece();
         }
-        settled = true;
-        SettlePiece();
-        CheckForLine();
-      }
-      return settled;
+        else
+        {
+            GameOver = IsGameOver();
+            if (GameOver)
+            {
+                return true;
+            }
+            settled = true;
+            SettlePiece();
+            CheckForLine();
+        }
+        return settled;
     }
 
     public bool IsGameOver() {
@@ -427,6 +430,18 @@ namespace Quadris {
           break;
       }
     }
+
+    public void ChangePause()
+        {
+            if(Paused)
+            {
+                Paused = false;
+            }
+            else
+            {
+                Paused = true;
+            }
+        }
 
     public void LvlUP()
     {
