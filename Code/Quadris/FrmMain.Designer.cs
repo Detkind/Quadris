@@ -42,6 +42,7 @@ namespace Quadris {
       this.label8 = new System.Windows.Forms.Label();
       this.panel2HeldPiece = new System.Windows.Forms.Panel();
       this.label14 = new System.Windows.Forms.Label();
+      this.label15 = new System.Windows.Forms.Label();
       this.panel1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -145,6 +146,7 @@ namespace Quadris {
       // 
       this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
       this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.panel1.Controls.Add(this.label15);
       this.panel1.Controls.Add(this.label13);
       this.panel1.Controls.Add(this.label12);
       this.panel1.Controls.Add(this.label11);
@@ -152,7 +154,7 @@ namespace Quadris {
       this.panel1.Controls.Add(this.label9);
       this.panel1.Controls.Add(this.label8);
       this.panel1.Location = new System.Drawing.Point(70, 723);
-      this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.panel1.Margin = new System.Windows.Forms.Padding(6);
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(372, 455);
       this.panel1.TabIndex = 8;
@@ -161,7 +163,7 @@ namespace Quadris {
       // 
       this.label13.AutoSize = true;
       this.label13.ForeColor = System.Drawing.Color.White;
-      this.label13.Location = new System.Drawing.Point(80, 368);
+      this.label13.Location = new System.Drawing.Point(80, 330);
       this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label13.Name = "label13";
       this.label13.Size = new System.Drawing.Size(167, 32);
@@ -172,7 +174,7 @@ namespace Quadris {
       // 
       this.label12.AutoSize = true;
       this.label12.ForeColor = System.Drawing.Color.White;
-      this.label12.Location = new System.Drawing.Point(80, 300);
+      this.label12.Location = new System.Drawing.Point(80, 270);
       this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label12.Name = "label12";
       this.label12.Size = new System.Drawing.Size(177, 32);
@@ -183,7 +185,7 @@ namespace Quadris {
       // 
       this.label11.AutoSize = true;
       this.label11.ForeColor = System.Drawing.Color.White;
-      this.label11.Location = new System.Drawing.Point(80, 232);
+      this.label11.Location = new System.Drawing.Point(80, 210);
       this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label11.Name = "label11";
       this.label11.Size = new System.Drawing.Size(196, 32);
@@ -194,7 +196,7 @@ namespace Quadris {
       // 
       this.label10.AutoSize = true;
       this.label10.ForeColor = System.Drawing.Color.White;
-      this.label10.Location = new System.Drawing.Point(80, 165);
+      this.label10.Location = new System.Drawing.Point(80, 150);
       this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label10.Name = "label10";
       this.label10.Size = new System.Drawing.Size(177, 32);
@@ -205,7 +207,7 @@ namespace Quadris {
       // 
       this.label9.AutoSize = true;
       this.label9.ForeColor = System.Drawing.Color.White;
-      this.label9.Location = new System.Drawing.Point(80, 97);
+      this.label9.Location = new System.Drawing.Point(80, 90);
       this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label9.Name = "label9";
       this.label9.Size = new System.Drawing.Size(214, 32);
@@ -216,7 +218,7 @@ namespace Quadris {
       // 
       this.label8.AutoSize = true;
       this.label8.ForeColor = System.Drawing.Color.White;
-      this.label8.Location = new System.Drawing.Point(80, 29);
+      this.label8.Location = new System.Drawing.Point(80, 30);
       this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(193, 32);
@@ -248,6 +250,17 @@ namespace Quadris {
       this.label14.UseMnemonic = false;
       this.label14.Click += new System.EventHandler(this.label14_Click_2);
       // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.ForeColor = System.Drawing.Color.White;
+      this.label15.Location = new System.Drawing.Point(80, 390);
+      this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(177, 32);
+      this.label15.TabIndex = 6;
+      this.label15.Text = "Space : Hold";
+      // 
       // FrmMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -265,7 +278,7 @@ namespace Quadris {
       this.Controls.Add(this.lblNextPiece);
       this.Controls.Add(this.panelNextPiece);
       this.Controls.Add(this.panBoard);
-      this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+      this.Margin = new System.Windows.Forms.Padding(8);
       this.MaximizeBox = false;
       this.Name = "FrmMain";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -305,6 +318,7 @@ namespace Quadris {
         private System.Windows.Forms.Label label8;
 	private System.Windows.Forms.Panel panel2HeldPiece;
     private System.Windows.Forms.Label label14;
+    private System.Windows.Forms.Label label15;
   }
 }
 
