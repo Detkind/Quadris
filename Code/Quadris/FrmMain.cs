@@ -1,4 +1,5 @@
-﻿using Quadris.Properties;
+﻿#pragma warning disable 1591
+using Quadris.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,10 +17,16 @@ namespace Quadris {
     private const int NEXTPIECE_COLS = 4; // number of columns for the next piece board
     private const int NEXTPIECE_ROWS = 4; // number of rows for the next piece board
 
+    private const int HELDPIECE_COLS = 4;
+    private const int HELDPIECE_ROWS = 4;
+    private bool Swapped;
+
     private Label[,] gridControls; // main board grid which is displayed
     private Label[,] nextPieceGridControls; // next piece grid which is displayed
+    private Label[,] heldPieceGridControls;
 	private Board board; // main board
     private NextPieceBoard nextPieceBoard; // next piece board
+    private HeldPieceBoard heldPieceBoard;
 
     private SoundPlayer sndPlayer;
 
@@ -47,8 +54,10 @@ namespace Quadris {
     private void FrmMain_Load(object sender, EventArgs e) {
       this.Size = new Size(480, 680);
       // instantiate boards
+      Swapped = false;
       board = new Board();
       nextPieceBoard = new NextPieceBoard();
+      heldPieceBoard = new HeldPieceBoard();
       // get first piece and set it as main board's active piece
       Piece piece = Piece.GetRandPiece();
       board.ActivePiece = piece;
@@ -59,6 +68,8 @@ namespace Quadris {
       // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();
+      CreateHeldPieceGrid();
+   
       //sndPlayer = new SoundPlayer(Resources.bg_music);
       //sndPlayer.PlayLooping();
     }
@@ -90,7 +101,20 @@ namespace Quadris {
         }
       }
     }
-    
+
+    private void CreateHeldPieceGrid() {
+      panel2HeldPiece.Width = CELL_WIDTH * HELDPIECE_COLS;
+      panel2HeldPiece.Height = CELL_WIDTH * HELDPIECE_ROWS;
+      heldPieceGridControls = new Label[HELDPIECE_ROWS, HELDPIECE_COLS];
+      panel2HeldPiece.Controls.Clear();
+      for (int col = 0; col < NEXTPIECE_COLS; col++) {
+        for (int row = 0; row < NEXTPIECE_ROWS; row++) {
+          Label lblCell = MakeGridCell(row, col);
+          panel2HeldPiece.Controls.Add(lblCell);
+          heldPieceGridControls[row, col] = lblCell;
+        }
+      }
+    }
     private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
@@ -100,6 +124,21 @@ namespace Quadris {
           }
           else {
             nextPieceGridControls[row, col].Image = null;
+          }
+        }
+      }
+    }
+
+    private void UpdateHeldPieceGrid() {
+      for (int col = 0; col < HELDPIECE_COLS; col++) {
+        for (int row = 0; row < HELDPIECE_ROWS; row++) {
+          GridCellInfo cellInfo = heldPieceBoard.Grid[row, col];
+          if (cellInfo.State == CellState.OCCUPIED_HELD_PIECE)
+          {
+            heldPieceGridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
+          }
+          else {
+            heldPieceGridControls[row, col].Image = null;
           }
         }
       }
@@ -138,6 +177,13 @@ namespace Quadris {
       lblLevelNum.Text = board.Level.ToString();
     }
 
+    private void GetNewActiveandNextPiece() {
+      board.ActivePiece = nextPieceBoard.NextPiece;
+      board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
+      nextPieceBoard.NextPiece = Piece.GetRandPiece();
+      UpdateGrid();
+    }
+
     private void tmrFps_Tick(object sender, EventArgs e) {
       if (!board.Paused) {
         tmrFps.Interval = board.LevelSpeed;
@@ -151,15 +197,17 @@ namespace Quadris {
             FormMenu formMenu = new FormMenu();
             formMenu.Show();
         }
-
+        if (heldPieceBoard.HeldPiece != null) {
+          UpdateHeldPieceGrid();
+        }
         nextPieceBoard.Update();
-
+        
         // set active piece to next piece and create new shadow piece and new next piece once a piece has been settled
         if (settled) {
-            board.ActivePiece = nextPieceBoard.NextPiece;
-            board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
-            nextPieceBoard.NextPiece = Piece.GetRandPiece();
+          Swapped = false;
+          GetNewActiveandNextPiece();
         }
+
         UpdateGrid();
         UpdateNextPieceGrid();
         UpdateScore();
@@ -204,6 +252,31 @@ namespace Quadris {
         case Keys.Tab:
           board.ChangePause();
           break;
+
+        case Keys.Space:
+          if (!Swapped)
+          {
+            if (heldPieceBoard.HeldPiece != null)
+            {
+              Piece shadow = heldPieceBoard.ShadowPiece;
+              Piece temp = heldPieceBoard.HeldPiece;
+              heldPieceBoard.HeldPiece = board.ActivePiece;
+              heldPieceBoard.ShadowPiece = board.ShadowPiece; 
+              board.ActivePiece = temp;
+              board.ShadowPiece = shadow;
+              board.ActivePiece.GridRow = 0;
+            }
+            else {
+              heldPieceBoard.HeldPiece = board.ActivePiece;
+              heldPieceBoard.ShadowPiece = board.ShadowPiece;
+              GetNewActiveandNextPiece();
+            }
+            UpdateGrid();
+            heldPieceBoard.Update();
+            UpdateHeldPieceGrid();
+            Swapped = true;
+          }
+          break;
       }
     }
 
@@ -241,5 +314,20 @@ namespace Quadris {
         {
 
         }
-    }
+
+	private void label14_Click(object sender, EventArgs e)
+	{
+
+	}
+
+	private void label14_Click_1(object sender, EventArgs e)
+	{
+
+	}
+
+	private void panel2HeldPiece_Paint(object sender, PaintEventArgs e)
+	{
+
+	}
+  }
 }

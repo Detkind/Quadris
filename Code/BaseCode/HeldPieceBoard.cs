@@ -11,7 +11,7 @@ namespace Quadris
   {
     public GridCellInfo[,] Grid { get; private set; }
     public Piece HeldPiece { get; set; }
-
+    public Piece ShadowPiece { get; set; }
     public HeldPieceBoard()
     {
       Grid = new GridCellInfo[4, 4];
@@ -24,6 +24,7 @@ namespace Quadris
       }
     }
 
+  
     public void Update()
     {
       for (int r = 0; r < Grid.GetLength(0); r++)
