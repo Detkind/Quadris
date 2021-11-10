@@ -10,25 +10,43 @@ using System.Windows.Forms;
 
 namespace Quadris {
   public partial class FormMenu : Form {
+    List<Panel> listPanel = new List<Panel>();
+    int index = 0;
+
     public FormMenu() {
       InitializeComponent();
     }
 
-    private void button1_Click(object sender, EventArgs e) {
+    private void FormMenu_Load(object sender, EventArgs e) {
+      this.Size = new Size(425, 345);
+      listPanel.Add(panelQuadrisMenu);
+      listPanel.Add(panelTrollrisMenu);
+      listPanel[index].BringToFront();
+    }
+
+    private void btnStartQuadris_Click(object sender, EventArgs e) {
       FrmMain quadrisGameForm = new FrmMain();
       quadrisGameForm.Show();
       this.Hide();
     }
 
-    private void lblQuadrisLogo_Click(object sender, EventArgs e) {
-
+    private void btnSwitchToTrollris_Click(object sender, EventArgs e) {
+      if (index < listPanel.Count - 1) {
+        listPanel[++index].BringToFront();
+      }
     }
 
-    private void FormMenu_Load(object sender, EventArgs e) {
-      this.Size = new Size(525, 500);
+    private void btnSwitchToQuadris_Click(object sender, EventArgs e) {
+      if (index > 0) {
+        listPanel[--index].BringToFront();
+      }
     }
 
     private void btnLeaderboard_Click(object sender, EventArgs e) {
+
+    }
+
+    private void btnQuitQuadris_Click(object sender, EventArgs e) {
 
     }
   }
