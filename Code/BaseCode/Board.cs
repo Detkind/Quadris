@@ -55,6 +55,7 @@ namespace Quadris {
     public int ClearedRows = 0;
     public int Level = 1;
     public int LevelSpeed = 500;
+    public bool GameOver = false;
 
     public Board()
     {
@@ -84,11 +85,26 @@ namespace Quadris {
       }
       else
       {
+        GameOver = IsGameOver();
+        if (GameOver) {
+          return true;
+        }
         settled = true;
         SettlePiece();
         CheckForLine();
       }
       return settled;
+    }
+
+    public bool IsGameOver() {
+      for (int row = 0; row < ActivePiece.Layout.GetLength(0); row++) {
+        for (int col = 0; col < ActivePiece.Layout.GetLength(1); col++) {
+          if (ActivePiece.Layout[row, col] && (ActivePiece.GridRow + row) < 4) {
+            return true;
+          }
+        }
+      }
+      return false;
     }
 
     public void UpdateShadow() {
@@ -390,7 +406,7 @@ namespace Quadris {
       if (fullRows > 0) {
         AddScore(fullRows);
       }
-      bool isLevelUp = LvlUP();
+      LvlUP();
     }
 
     private void AddScore(int fullrows)
@@ -412,24 +428,12 @@ namespace Quadris {
       }
     }
 
-    public bool LvlUP()
+    public void LvlUP()
     {
       if ((Level * 10) < ClearedRows && Level < 10) {
         Level++;
         LevelSpeed -= 40;
-        return true; 
       }
-      return false; 
     }
-
-//    public void IncreaseSpeed(int i) {
-//      if (TmpSpeed > 50)
-//      {
-//        LevelSpeed = TmpSpeed;
-//      }
-//      else {
-//        LevelSpeed = 50; 
-//     }
-//    }
   }
 }
