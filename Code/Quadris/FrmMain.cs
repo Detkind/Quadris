@@ -271,6 +271,7 @@ namespace Quadris {
               heldPieceBoard.ShadowPiece = board.ShadowPiece;
               GetNewActiveandNextPiece();
             }
+            board.Update();
             UpdateGrid();
             heldPieceBoard.Update();
             UpdateHeldPieceGrid();
