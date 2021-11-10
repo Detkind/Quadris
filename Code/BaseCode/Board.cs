@@ -7,7 +7,8 @@ namespace Quadris {
     OCCUPIED_NEXT_PIECE,
     COLLISION,
     OCCUPIED_SHADOW_PIECE,
-    SHADOW
+    SHADOW,
+	OCCUPIED_HELD_PIECE
   }
 
   public enum MoveDir {
@@ -42,6 +43,11 @@ namespace Quadris {
     public void SetToNextPiece(Piece nextPiece) {
       State = CellState.OCCUPIED_NEXT_PIECE;
       Color = nextPiece.Color;
+    }
+
+    public void SetToHeldPiece(Piece heldPiece) {
+      State = CellState.OCCUPIED_HELD_PIECE;
+      Color = heldPiece.Color; 
     }
   }
 
