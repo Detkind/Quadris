@@ -19,5 +19,17 @@ namespace Quadris {
       quadrisGameForm.Show();
       this.Hide();
     }
+
+    private void lblQuadrisLogo_Click(object sender, EventArgs e) {
+
+    }
+
+    private void FormMenu_Load(object sender, EventArgs e) {
+      this.Size = new Size(525, 500);
+    }
+
+    private void btnLeaderboard_Click(object sender, EventArgs e) {
+
+    }
   }
 }
