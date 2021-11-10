@@ -61,42 +61,35 @@ namespace Quadris {
     public Board()
     {
       Grid = new GridCellInfo[24, 10];
-      for (int i = 0; i < Grid.GetLength(0); i++)
-      {
-        for (int j = 0; j < Grid.GetLength(1); j++)
-        {
+      for (int i = 0; i < Grid.GetLength(0); i++) {
+        for (int j = 0; j < Grid.GetLength(1); j++) {
           Grid[i, j] = new GridCellInfo();
         }
       }
     }
 
-        /// <summary>
-        /// This method updates the grid and moves the active piece down
-        /// </summary>
-        /// 
-    public bool Update()
-    {
-
-        
-        bool settled = false;
-        if (ActivePieceCanMove(MoveDir.DOWN))
+    /// <summary>
+    /// This method updates the grid and moves the active piece down
+    /// </summary>
+    /// 
+    public bool Update() {
+      bool settled = false;
+      if (ActivePieceCanMove(MoveDir.DOWN)) {
+        UpdateShadow();
+        ActivePiece.MoveDown();
+        RefreshGridWithActivePiece();
+      }
+      else {
+        GameOver = IsGameOver();
+        if (GameOver)
         {
-            UpdateShadow();
-            ActivePiece.MoveDown();
-            RefreshGridWithActivePiece();
+            return true;
         }
-        else
-        {
-            GameOver = IsGameOver();
-            if (GameOver)
-            {
-                return true;
-            }
-            settled = true;
-            SettlePiece();
-            CheckForLine();
-        }
-        return settled;
+        settled = true;
+        SettlePiece();
+        CheckForLine();
+      }
+      return settled;
     }
 
     public bool IsGameOver() {
@@ -111,57 +104,44 @@ namespace Quadris {
     }
 
     public void UpdateShadow() {
-      ShadowPiece.GridRow = 0;
+      ShadowPiece.GridRow = ActivePiece.GridRow;
       while (ShadowPieceCanMove()) {
         ShadowPiece.MoveDown();
         RefreshGridWithShadowPiece();
       }
     }
 
-    private void RefreshGridWithShadowPiece()
-    {
-      for (int r = 0; r < Grid.GetLength(0); r++)
-      {
-        for (int c = 0; c < Grid.GetLength(1); c++)
-        {
+    private void RefreshGridWithShadowPiece() {
+      for (int r = 0; r < Grid.GetLength(0); r++) {
+        for (int c = 0; c < Grid.GetLength(1); c++) {
           GridCellInfo cellInfo = Grid[r, c];
-          if (cellInfo.State == CellState.OCCUPIED_SHADOW_PIECE)
-          {
+          if (cellInfo.State == CellState.OCCUPIED_SHADOW_PIECE) {
             cellInfo.Reset();
           }
         }
       }
-      for (int r = 0; r < ShadowPiece.Layout.GetLength(0); r++)
-      {
-        for (int c = 0; c < ShadowPiece.Layout.GetLength(1); c++)
-        {
-          if (ShadowPiece.Layout[r, c])
-          {
+      for (int r = 0; r < ShadowPiece.Layout.GetLength(0); r++) {
+        for (int c = 0; c < ShadowPiece.Layout.GetLength(1); c++) {
+          if (ShadowPiece.Layout[r, c]) {
             GridCellInfo cellInfo = GetCellInfo(r + ShadowPiece.GridRow, c + ShadowPiece.GridCol);
             cellInfo?.SetToShadowPiece(ShadowPiece);
           }
         }
       }
     }
-    private void RefreshGridWithActivePiece()
-    {
-      for (int r = 0; r < Grid.GetLength(0); r++)
-      {
-        for (int c = 0; c < Grid.GetLength(1); c++)
-        {
+
+    private void RefreshGridWithActivePiece() {
+      for (int r = 0; r < Grid.GetLength(0); r++) {
+        for (int c = 0; c < Grid.GetLength(1); c++) {
           GridCellInfo cellInfo = Grid[r, c];
-          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE)
-          {
+          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE) {
             cellInfo.Reset();
           }
         }
       }
-      for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++)
-      {
-        for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++)
-        {
-          if (ActivePiece.Layout[r, c])
-          {
+      for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
+        for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
+          if (ActivePiece.Layout[r, c]) {
             GridCellInfo cellInfo = GetCellInfo(r + ActivePiece.GridRow, c + ActivePiece.GridCol);
             cellInfo?.SetToActivePiece(ActivePiece);
           }
@@ -175,18 +155,15 @@ namespace Quadris {
     /// <param name="row">the row</param>
     /// <param name="col">the column</param>
     /// <returns>A GridCellInfo object</returns>
-    public GridCellInfo GetCellInfo(int row, int col)
-    {
+    public GridCellInfo GetCellInfo(int row, int col) {
       if (row < 0 || row >= Grid.GetLength(0) || col < 0 || col >= Grid.GetLength(1))
         return null;
       else
         return Grid[row, col];
     }
 
-    public void MoveActivePieceLeft()
-    {
-      if (ActivePieceCanMove(MoveDir.LEFT))
-      {
+    public void MoveActivePieceLeft() {
+      if (ActivePieceCanMove(MoveDir.LEFT)) {
         ActivePiece.MoveLeft();
         ShadowPiece.MoveLeft();
         UpdateShadow();
@@ -194,10 +171,8 @@ namespace Quadris {
       }
     }
 
-    public void MoveActivePieceRight()
-    {
-      if (ActivePieceCanMove(MoveDir.RIGHT))
-      {
+    public void MoveActivePieceRight() {
+      if (ActivePieceCanMove(MoveDir.RIGHT)) {
         ActivePiece.MoveRight();
         ShadowPiece.MoveRight();
         UpdateShadow();
@@ -205,12 +180,10 @@ namespace Quadris {
       }
     }
 
-    public void RotateActivePieceRight()
-    {
+    public void RotateActivePieceRight() {
       ActivePiece.RotateRight();
       ShadowPiece.RotateRight();
-      if (CheckForOutOfBounds())
-      {
+      if (CheckForOutOfBounds()) {
         ActivePiece.RotateLeft();
         ShadowPiece.RotateLeft();
       }
@@ -218,12 +191,10 @@ namespace Quadris {
       RefreshGridWithActivePiece();
     }
 
-    public void RotateActivePieceLeft()
-    {
+    public void RotateActivePieceLeft() {
       ActivePiece.RotateLeft();
       ShadowPiece.RotateLeft();
-      if (CheckForOutOfBounds())
-      {
+      if (CheckForOutOfBounds()) {
         ActivePiece.RotateRight();
         ShadowPiece.RotateRight();
       }
@@ -231,56 +202,42 @@ namespace Quadris {
       RefreshGridWithActivePiece();
     }
 
-    public bool ShadowPieceCanMove()
-    {
+    public bool ShadowPieceCanMove() {
       bool canMove = true;
-    
-          for (int c = 0; c < ShadowPiece.Layout.GetLength(1); c++)
-          {
-            int lastRow = -1;
-            for (int r = 0; r < ShadowPiece.Layout.GetLength(0); r++)
-            {
-              if (ShadowPiece.Layout[r, c])
-              {
-                lastRow = r;
-              }
-            }
-            if (lastRow == -1)
-            {
-              continue;
-            }
-            GridCellInfo cellInfo = GetCellInfo(ShadowPiece.GridRow + lastRow + 1, ShadowPiece.GridCol + c);
-            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
-            {
-              canMove = false;
-              break;
-            }
+      for (int c = 0; c < ShadowPiece.Layout.GetLength(1); c++) {
+        int lastRow = -1;
+        for (int r = 0; r < ShadowPiece.Layout.GetLength(0); r++) {
+          if (ShadowPiece.Layout[r, c]) {
+            lastRow = r;
           }
+        }
+        if (lastRow == -1) {
+          continue;
+        }
+        GridCellInfo cellInfo = GetCellInfo(ShadowPiece.GridRow + lastRow + 1, ShadowPiece.GridCol + c);
+        if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
+          canMove = false;
+          break;
+        }
+      }
       return canMove;
     }
-    public bool ActivePieceCanMove(MoveDir moveDir)
-    {
+    public bool ActivePieceCanMove(MoveDir moveDir) {
       bool canMove = true;
-      switch (moveDir)
-      {
+      switch (moveDir) {
         case MoveDir.DOWN:
-          for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++)
-          {
+          for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
             int lastRow = -1;
-            for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++)
-            {
-              if (ActivePiece.Layout[r, c])
-              {
+            for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
+              if (ActivePiece.Layout[r, c]) {
                 lastRow = r;
               }
             }
-            if (lastRow == -1)
-            {
+            if (lastRow == -1) {
               continue;
             }
             GridCellInfo cellInfo = GetCellInfo(ActivePiece.GridRow + lastRow + 1, ActivePiece.GridCol + c);
-            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
-            {
+            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
               canMove = false;
               break;
             }
@@ -288,24 +245,19 @@ namespace Quadris {
           break;
 
         case MoveDir.LEFT:
-          for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++)
-          {
+          for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
             int firstCol = -1;
-            for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++)
-            {
-              if (ActivePiece.Layout[r, c])
-              {
+            for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
+              if (ActivePiece.Layout[r, c]) {
                 firstCol = c;
                 break;
               }
             }
-            if (firstCol == -1)
-            {
+            if (firstCol == -1) {
               continue;
             }
             GridCellInfo cellInfo = GetCellInfo(ActivePiece.GridRow + r, ActivePiece.GridCol + firstCol - 1);
-            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
-            {
+            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
               canMove = false;
               break;
             }
@@ -313,23 +265,18 @@ namespace Quadris {
           break;
 
         case MoveDir.RIGHT:
-          for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++)
-          {
+          for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
             int lastCol = -1;
-            for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++)
-            {
-              if (ActivePiece.Layout[r, c])
-              {
+            for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
+              if (ActivePiece.Layout[r, c]) {
                 lastCol = c;
               }
             }
-            if (lastCol == -1)
-            {
+            if (lastCol == -1) {
               continue;
             }
             GridCellInfo cellInfo = GetCellInfo(ActivePiece.GridRow + r, ActivePiece.GridCol + lastCol + 1);
-            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
-            {
+            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
               canMove = false;
               break;
             }
@@ -339,17 +286,12 @@ namespace Quadris {
       return canMove;
     }
 
-    private bool CheckForOutOfBounds()
-    {
-      for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++)
-      {
-        for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++)
-        {
-          if (ActivePiece.Layout[r, c])
-          {
+    private bool CheckForOutOfBounds() {
+      for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
+        for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
+          if (ActivePiece.Layout[r, c]) {
             GridCellInfo cellInfo = GetCellInfo(r + ActivePiece.GridRow, c + ActivePiece.GridCol);
-            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY)
-            {
+            if (cellInfo == null || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY) {
               return true;
             }
           }
@@ -358,42 +300,31 @@ namespace Quadris {
       return false;
     }
 
-    public void SettlePiece()
-    {
-      for (int r = 0; r < Grid.GetLength(0); r++)
-      {
-        for (int c = 0; c < Grid.GetLength(1); c++)
-        {
+    public void SettlePiece() {
+      for (int r = 0; r < Grid.GetLength(0); r++) {
+        for (int c = 0; c < Grid.GetLength(1); c++) {
           GridCellInfo cellInfo = Grid[r, c];
-          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE)
-          {
+          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE) {
             cellInfo.State = CellState.OCCUPIED_PREVIOUSLY;
           }
         }
       }
     }
 
-    public void CheckForLine()
-    {
+    public void CheckForLine() {
       int fullRows = 0;
-      for (int curRow = 0; curRow < Grid.GetLength(0); curRow++)
-      {
+      for (int curRow = 0; curRow < Grid.GetLength(0); curRow++) {
         bool allFilled = true;
-        for (int col = 0; col < Grid.GetLength(1); col++)
-        {
-          if (GetCellInfo(curRow, col)?.State == CellState.EMPTY)
-          {
+        for (int col = 0; col < Grid.GetLength(1); col++) {
+          if (GetCellInfo(curRow, col)?.State == CellState.EMPTY) {
             allFilled = false;
             break;
           }
         }
-        if (allFilled)
-        {
+        if (allFilled) {
           fullRows++;
-          for (int col = 0; col < Grid.GetLength(1); col++)
-          {
-            for (int dropRow = curRow; dropRow > 0; dropRow--)
-            {
+          for (int col = 0; col < Grid.GetLength(1); col++) {
+            for (int dropRow = curRow; dropRow > 0; dropRow--) {
               Grid[dropRow, col] = Grid[dropRow - 1, col];
             }
             Grid[0, col] = new GridCellInfo();
@@ -431,20 +362,16 @@ namespace Quadris {
       }
     }
 
-    public void ChangePause()
-        {
-            if(Paused)
-            {
-                Paused = false;
-            }
-            else
-            {
-                Paused = true;
-            }
-        }
+    public void ChangePause() {
+      if(Paused) {
+        Paused = false;
+      }
+      else {
+        Paused = true;
+      }
+    }
 
-    public void LvlUP()
-    {
+    public void LvlUP() {
       if ((Level * 10) < ClearedRows && Level < 10) {
         Level++;
         LevelSpeed -= 40;
