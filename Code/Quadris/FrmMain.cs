@@ -45,6 +45,7 @@ namespace Quadris {
 	}
 
     private void FrmMain_Load(object sender, EventArgs e) {
+      this.Size = new Size(480, 680);
       // instantiate boards
       board = new Board();
       nextPieceBoard = new NextPieceBoard();
@@ -77,14 +78,14 @@ namespace Quadris {
     }
 
     private void CreateNextPieceGrid() {
-      panel1.Width = CELL_WIDTH * NEXTPIECE_COLS;
-      panel1.Height = CELL_HEIGHT * NEXTPIECE_ROWS;
+      panelNextPiece.Width = CELL_WIDTH * NEXTPIECE_COLS;
+      panelNextPiece.Height = CELL_HEIGHT * NEXTPIECE_ROWS;
       nextPieceGridControls = new Label[NEXTPIECE_ROWS, NEXTPIECE_COLS];
-      panel1.Controls.Clear();
+      panelNextPiece.Controls.Clear();
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
           Label lblCell = MakeGridCell(row, col);
-          panel1.Controls.Add(lblCell);
+          panelNextPiece.Controls.Add(lblCell);
           nextPieceGridControls[row, col] = lblCell;
         }
       }
