@@ -52,7 +52,7 @@ namespace Quadris {
 	}
 
     private void FrmMain_Load(object sender, EventArgs e) {
-      this.Size = new Size(480, 680);
+      this.Size = new Size(600, 680);
       // instantiate boards
       Swapped = false;
       board = new Board();
@@ -330,5 +330,9 @@ namespace Quadris {
 	{
 
 	}
+
+    private void label14_Click_2(object sender, EventArgs e) {
+
+    }
   }
 }
