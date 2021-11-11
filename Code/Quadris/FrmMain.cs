@@ -253,7 +253,7 @@ namespace Quadris {
           board.ChangePause();
           break;
 
-        case Keys.Space:
+        case Keys.C:
           if (!Swapped)
           {
             if (heldPieceBoard.HeldPiece != null)
@@ -277,6 +277,14 @@ namespace Quadris {
             UpdateHeldPieceGrid();
             Swapped = true;
           }
+          break;
+
+        case Keys.Space:
+          board.DropPieceHard();
+          GetNewActiveandNextPiece();
+          board.Update();
+          UpdateGrid();
+          Swapped = false;
           break;
       }
     }
@@ -332,6 +340,14 @@ namespace Quadris {
 	}
 
     private void label14_Click_2(object sender, EventArgs e) {
+
+    }
+
+    private void lblLevelNum_Click(object sender, EventArgs e) {
+
+    }
+
+    private void label12_Click(object sender, EventArgs e) {
 
     }
   }

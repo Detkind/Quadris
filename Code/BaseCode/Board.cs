@@ -339,6 +339,14 @@ namespace Quadris {
       UpdateScore(fullRows);
     }
 
+    public void DropPieceHard() {
+      while (ActivePieceCanMove(MoveDir.DOWN)) {
+        ActivePiece.MoveDown();
+        RefreshGridWithActivePiece();
+      }
+      Update();
+    }
+
     private void UpdateScore(int fullRows) {
       ClearedRows += fullRows;
       if (fullRows > 0) {
