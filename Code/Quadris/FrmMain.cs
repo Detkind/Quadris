@@ -115,6 +115,7 @@ namespace Quadris {
         }
       }
     }
+
     private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
@@ -254,10 +255,8 @@ namespace Quadris {
           break;
 
         case Keys.C:
-          if (!Swapped)
-          {
-            if (heldPieceBoard.HeldPiece != null)
-            {
+          if (!Swapped) {
+            if (heldPieceBoard.HeldPiece != null) {
               Piece shadow = heldPieceBoard.ShadowPiece;
               Piece temp = heldPieceBoard.HeldPiece;
               heldPieceBoard.HeldPiece = board.ActivePiece;
@@ -287,68 +286,6 @@ namespace Quadris {
           Swapped = false;
           break;
       }
-    }
-
-    private void panBoard_Paint(object sender, PaintEventArgs e) {
-
-    }
-
-    private void label1_Click(object sender, EventArgs e) {
-
-    }
-
-    private void lblNextPiece_Click(object sender, EventArgs e) {
-
-    }
-
-    private void label1_Click_1(object sender, EventArgs e) {
-
-    }
-
-    private void FrmMain_KeyUp(object sender, KeyEventArgs e) {
-
-    }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-	private void label14_Click(object sender, EventArgs e)
-	{
-
-	}
-
-	private void label14_Click_1(object sender, EventArgs e)
-	{
-
-	}
-
-	private void panel2HeldPiece_Paint(object sender, PaintEventArgs e)
-	{
-
-	}
-
-    private void label14_Click_2(object sender, EventArgs e) {
-
-    }
-
-    private void lblLevelNum_Click(object sender, EventArgs e) {
-
-    }
-
-    private void label12_Click(object sender, EventArgs e) {
-
     }
   }
 }

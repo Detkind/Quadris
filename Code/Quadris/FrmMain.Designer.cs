@@ -34,6 +34,7 @@ namespace Quadris {
       this.lblLevel = new System.Windows.Forms.Label();
       this.lblLevelNum = new System.Windows.Forms.Label();
       this.panel1 = new System.Windows.Forms.Panel();
+      this.label16 = new System.Windows.Forms.Label();
       this.label15 = new System.Windows.Forms.Label();
       this.label13 = new System.Windows.Forms.Label();
       this.label12 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@ namespace Quadris {
       this.label8 = new System.Windows.Forms.Label();
       this.panel2HeldPiece = new System.Windows.Forms.Panel();
       this.label14 = new System.Windows.Forms.Label();
-      this.label16 = new System.Windows.Forms.Label();
       this.panel1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -56,7 +56,6 @@ namespace Quadris {
       this.panBoard.Name = "panBoard";
       this.panBoard.Size = new System.Drawing.Size(200, 400);
       this.panBoard.TabIndex = 1;
-      this.panBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.panBoard_Paint);
       // 
       // tmrFps
       // 
@@ -85,7 +84,6 @@ namespace Quadris {
       this.lblNextPiece.TabIndex = 3;
       this.lblNextPiece.Text = "Next Piece:";
       this.lblNextPiece.UseMnemonic = false;
-      this.lblNextPiece.Click += new System.EventHandler(this.lblNextPiece_Click);
       // 
       // lblScore
       // 
@@ -99,7 +97,6 @@ namespace Quadris {
       this.lblScore.TabIndex = 4;
       this.lblScore.Text = "Score: ";
       this.lblScore.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-      this.lblScore.Click += new System.EventHandler(this.label1_Click);
       // 
       // lblScoreNum
       // 
@@ -112,7 +109,6 @@ namespace Quadris {
       this.lblScoreNum.Size = new System.Drawing.Size(29, 31);
       this.lblScoreNum.TabIndex = 5;
       this.lblScoreNum.Text = "0";
-      this.lblScoreNum.Click += new System.EventHandler(this.label1_Click_1);
       // 
       // lblLevel
       // 
@@ -139,7 +135,6 @@ namespace Quadris {
       this.lblLevelNum.Size = new System.Drawing.Size(29, 31);
       this.lblLevelNum.TabIndex = 7;
       this.lblLevelNum.Text = "1";
-      this.lblLevelNum.Click += new System.EventHandler(this.lblLevelNum_Click);
       // 
       // panel1
       // 
@@ -158,6 +153,17 @@ namespace Quadris {
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(142, 193);
       this.panel1.TabIndex = 8;
+      // 
+      // label16
+      // 
+      this.label16.AutoSize = true;
+      this.label16.ForeColor = System.Drawing.Color.White;
+      this.label16.Location = new System.Drawing.Point(25, 160);
+      this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label16.Name = "label16";
+      this.label16.Size = new System.Drawing.Size(65, 13);
+      this.label16.TabIndex = 7;
+      this.label16.Text = "Tab : Pause";
       // 
       // label15
       // 
@@ -191,7 +197,6 @@ namespace Quadris {
       this.label12.Size = new System.Drawing.Size(67, 13);
       this.label12.TabIndex = 4;
       this.label12.Text = "↓ : Drop Soft";
-      this.label12.Click += new System.EventHandler(this.label12_Click);
       // 
       // label11
       // 
@@ -246,7 +251,6 @@ namespace Quadris {
       this.panel2HeldPiece.Name = "panel2HeldPiece";
       this.panel2HeldPiece.Size = new System.Drawing.Size(115, 128);
       this.panel2HeldPiece.TabIndex = 9;
-      this.panel2HeldPiece.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2HeldPiece_Paint);
       // 
       // label14
       // 
@@ -259,18 +263,6 @@ namespace Quadris {
       this.label14.TabIndex = 10;
       this.label14.Text = "Hold Piece:";
       this.label14.UseMnemonic = false;
-      this.label14.Click += new System.EventHandler(this.label14_Click_2);
-      // 
-      // label16
-      // 
-      this.label16.AutoSize = true;
-      this.label16.ForeColor = System.Drawing.Color.White;
-      this.label16.Location = new System.Drawing.Point(25, 160);
-      this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-      this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(65, 13);
-      this.label16.TabIndex = 7;
-      this.label16.Text = "Tab : Pause";
       // 
       // FrmMain
       // 
@@ -295,7 +287,6 @@ namespace Quadris {
       this.Text = "Quadris!";
       this.Load += new System.EventHandler(this.FrmMain_Load);
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmMain_KeyDown);
-      this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmMain_KeyUp);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
       this.ResumeLayout(false);
