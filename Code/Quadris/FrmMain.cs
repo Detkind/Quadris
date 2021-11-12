@@ -228,16 +228,16 @@ namespace Quadris {
           break;
 
         case Keys.Z:
-            if (!board.Paused) {
-                board.RotateActivePieceLeft();
-                UpdateGrid();
-            }
+          if (!board.Paused) {
+            board.RotateActivePieceLeft();
+            UpdateGrid();
+          }
           break;
 
         case Keys.Right:
             if (!board.Paused) {
-                board.MoveActivePieceRight();
-                UpdateGrid();
+              board.MoveActivePieceRight();
+              UpdateGrid();
             }
           break;
 
@@ -290,69 +290,53 @@ namespace Quadris {
       }
     }
 
-        private void updateLeaderboard()
-        {
-            try
-            {
-                string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+    private void updateLeaderboard() {
+      try {
+        string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-                while (dir.Substring(dir.Length - "Quadris".Length) != "Quadris")
-                {
-                    dir = dir.Remove(dir.Length - 1, 1);
-                }
-
-                string path = dir + "\\HighScore.txt";
-
-                if (!File.Exists(path))
-                {
-                    // Create a file to write to.
-                    using (StreamWriter sw = File.CreateText(path))
-                    {
-                        for (int x = 0; x < 10; x++)
-                        {
-                            sw.WriteLine("0000");
-                        }
-                    }
-                }
-
-                List<int> scores = new List<int>();
-                int score;
-                int bumpedScore = board.Score;
-                using (StreamReader sr = File.OpenText(path))
-                {
-
-                    for (int x = 0; x < 10; x++)
-                    {
-                        score = int.Parse(sr.ReadLine());
-                        if (x < 5) {
-                            if (bumpedScore > score)
-                            {
-                                scores.Add(bumpedScore);
-                                bumpedScore = score;
-                            }
-                            else
-                            {
-                                scores.Add(score);
-                            }
-                        }
-                        else
-                        {
-                            scores.Add(score);
-                        }
-                    }
-                }
-
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    for (int x = 0; x < 10; x++)
-                    {
-                        sw.WriteLine(scores[x]);
-                    }
-                } 
-
-            }
-            catch (Exception e) { }
+        while (dir.Substring(dir.Length - "Quadris".Length) != "Quadris") {
+          dir = dir.Remove(dir.Length - 1, 1);
         }
 
+        string path = dir + "\\HighScore.txt";
+
+        if (!File.Exists(path)) {
+          // Create a file to write to.
+          using (StreamWriter sw = File.CreateText(path)) {
+            for (int x = 0; x < 10; x++) {
+              sw.WriteLine("0000");
+            }
+          }
+        }
+
+        List<int> scores = new List<int>();
+        int score;
+        int bumpedScore = board.Score;
+        using (StreamReader sr = File.OpenText(path)) {
+          for (int x = 0; x < 10; x++) {
+            score = int.Parse(sr.ReadLine());
+            if (x < 5) {
+              if (bumpedScore > score) {
+                scores.Add(bumpedScore);
+                bumpedScore = score;
+              }
+              else {
+                scores.Add(score);
+              }
+            }
+            else {
+              scores.Add(score);
+            }
+          }
+        }
+
+        using (StreamWriter sw = new StreamWriter(path)) {
+          for (int x = 0; x < 10; x++) {
+            sw.WriteLine(scores[x]);
+          }
+        } 
+      }
+      catch (Exception e) { }
     }
+  }
 }

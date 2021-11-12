@@ -87,7 +87,7 @@ namespace Quadris {
       else {
         GameOver = IsGameOver();
         if (GameOver) {
-            return true;
+          return true;
         }
         settled = true;
         SettlePiece();
@@ -355,10 +355,8 @@ namespace Quadris {
       LvlUP();
     }
 
-    private void AddScore(int fullrows)
-    {
-      switch (fullrows)
-      {
+    private void AddScore(int fullrows) {
+      switch (fullrows) {
         case 1:
           Score += 40 * Level;
           break;
