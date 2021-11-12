@@ -30,6 +30,7 @@ namespace Quadris {
     private HeldPieceBoard heldPieceBoard;
 
     private SoundPlayer sndPlayer;
+    private bool muted;
 
 	private static readonly Dictionary<PieceColor, Image> pieceColorToImgMap = new Dictionary<PieceColor, Image> {
 	  {PieceColor.BLUE, Resources.cell_blue},
@@ -54,6 +55,7 @@ namespace Quadris {
 
     private void FrmMain_Load(object sender, EventArgs e) {
       this.Size = new Size(600, 680);
+      this.KeyPreview = true;
       // instantiate boards
       Swapped = false;
       board = new Board();
@@ -71,8 +73,9 @@ namespace Quadris {
       CreateNextPieceGrid();
       CreateHeldPieceGrid();
    
-      //sndPlayer = new SoundPlayer(Resources.bg_music);
-      //sndPlayer.PlayLooping();
+      sndPlayer = new SoundPlayer(Resources.bg_music);
+      sndPlayer.PlayLooping();
+      muted = false;
     }
 
     private void CreateGrid() {
@@ -193,12 +196,13 @@ namespace Quadris {
         bool settled = board.Update();
 
         if (board.GameOver) {
-            tmrFps.Stop();
-            MessageBox.Show("Game Over");
-            updateLeaderboard();
-            this.Hide();
-            FormMenu formMenu = new FormMenu();
-            formMenu.Show();
+          sndPlayer.Stop();
+          tmrFps.Stop();
+          MessageBox.Show("Game Over");
+          updateLeaderboard();
+          this.Hide();
+          FormMenu formMenu = new FormMenu();
+          formMenu.Show();
         }
         if (heldPieceBoard.HeldPiece != null) {
           UpdateHeldPieceGrid();
@@ -252,8 +256,18 @@ namespace Quadris {
 		  tmrFps.Interval = 50;
           break;
 
-        case Keys.Tab:
+        case Keys.P:
           board.ChangePause();
+          if (board.Paused) {
+            if (!muted) {
+              sndPlayer.Stop();
+            }
+          }
+          else if (!board.Paused) {
+            if (!muted) {
+              sndPlayer.Play();
+            }
+          }
           break;
 
         case Keys.C:
@@ -337,6 +351,20 @@ namespace Quadris {
         } 
       }
       catch (Exception e) { }
+    }
+
+    private void btnQuadrisUnmuted_Click(object sender, EventArgs e) {
+      sndPlayer.Stop();
+      btnQuadrisMuted.BringToFront();
+      muted = true;
+      this.Focus();
+    }
+
+    private void btnQuadrisMuted_Click(object sender, EventArgs e) {
+      sndPlayer.Play();
+      btnQuadrisUnmuted.BringToFront();
+      muted = false;
+      this.Focus();
     }
   }
 }

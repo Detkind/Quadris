@@ -120,6 +120,8 @@
     <Content Include="Data\cell_red_shadow.png" />
     <Content Include="Data\cell_yellow_shadow.png" />
     <Content Include="Data\edit\cell_colors.fw.png" />
+    <None Include="Data\sound icons\unmuteIcon.png" />
+    <None Include="Data\sound icons\muteIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

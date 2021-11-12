@@ -44,6 +44,9 @@ namespace Quadris {
       this.label8 = new System.Windows.Forms.Label();
       this.panel2HeldPiece = new System.Windows.Forms.Panel();
       this.label14 = new System.Windows.Forms.Label();
+      this.btnQuadrisUnmuted = new System.Windows.Forms.Button();
+      this.btnQuadrisMuted = new System.Windows.Forms.Button();
+      this.textBox1 = new System.Windows.Forms.TextBox();
       this.panel1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -161,9 +164,9 @@ namespace Quadris {
       this.label16.Location = new System.Drawing.Point(25, 160);
       this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
       this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(65, 13);
+      this.label16.Size = new System.Drawing.Size(53, 13);
       this.label16.TabIndex = 7;
-      this.label16.Text = "Tab : Pause";
+      this.label16.Text = "P : Pause";
       // 
       // label15
       // 
@@ -264,13 +267,47 @@ namespace Quadris {
       this.label14.Text = "Hold Piece:";
       this.label14.UseMnemonic = false;
       // 
+      // btnQuadrisUnmuted
+      // 
+      this.btnQuadrisUnmuted.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.btnQuadrisUnmuted.Image = global::Quadris.Properties.Resources.unmuteIcon;
+      this.btnQuadrisUnmuted.Location = new System.Drawing.Point(15, 595);
+      this.btnQuadrisUnmuted.Name = "btnQuadrisUnmuted";
+      this.btnQuadrisUnmuted.Size = new System.Drawing.Size(30, 30);
+      this.btnQuadrisUnmuted.TabIndex = 11;
+      this.btnQuadrisUnmuted.TabStop = false;
+      this.btnQuadrisUnmuted.UseVisualStyleBackColor = true;
+      this.btnQuadrisUnmuted.Click += new System.EventHandler(this.btnQuadrisUnmuted_Click);
+      // 
+      // btnQuadrisMuted
+      // 
+      this.btnQuadrisMuted.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.btnQuadrisMuted.Image = global::Quadris.Properties.Resources.muteIcon;
+      this.btnQuadrisMuted.Location = new System.Drawing.Point(15, 595);
+      this.btnQuadrisMuted.Name = "btnQuadrisMuted";
+      this.btnQuadrisMuted.Size = new System.Drawing.Size(30, 30);
+      this.btnQuadrisMuted.TabIndex = 12;
+      this.btnQuadrisMuted.TabStop = false;
+      this.btnQuadrisMuted.UseVisualStyleBackColor = true;
+      this.btnQuadrisMuted.Click += new System.EventHandler(this.btnQuadrisMuted_Click);
+      // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(430, 543);
+      this.textBox1.Name = "textBox1";
+      this.textBox1.Size = new System.Drawing.Size(0, 20);
+      this.textBox1.TabIndex = 13;
+      // 
       // FrmMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.BackColor = System.Drawing.Color.Black;
-      this.ClientSize = new System.Drawing.Size(604, 530);
+      this.ClientSize = new System.Drawing.Size(604, 645);
+      this.Controls.Add(this.textBox1);
+      this.Controls.Add(this.btnQuadrisUnmuted);
+      this.Controls.Add(this.btnQuadrisMuted);
       this.Controls.Add(this.label14);
       this.Controls.Add(this.panel2HeldPiece);
       this.Controls.Add(this.panel1);
@@ -321,6 +358,9 @@ namespace Quadris {
     private System.Windows.Forms.Label label14;
     private System.Windows.Forms.Label label15;
     private System.Windows.Forms.Label label16;
+    private System.Windows.Forms.Button btnQuadrisUnmuted;
+    private System.Windows.Forms.Button btnQuadrisMuted;
+    private System.Windows.Forms.TextBox textBox1;
   }
 }
 
