@@ -239,10 +239,10 @@ namespace Quadris {
           break;
 
         case Keys.Right:
-            if (!board.Paused) {
-              board.MoveActivePieceRight();
-              UpdateGrid();
-            }
+          if (!board.Paused) {
+            board.MoveActivePieceRight();
+            UpdateGrid();
+          }
           break;
 
         case Keys.Left:
@@ -265,41 +265,45 @@ namespace Quadris {
           }
           else if (!board.Paused) {
             if (!muted) {
-              sndPlayer.Play();
+              sndPlayer.PlayLooping();
             }
           }
           break;
 
         case Keys.C:
-          if (!Swapped) {
-            if (heldPieceBoard.HeldPiece != null) {
-              Piece shadow = heldPieceBoard.ShadowPiece;
-              Piece temp = heldPieceBoard.HeldPiece;
-              heldPieceBoard.HeldPiece = board.ActivePiece;
-              heldPieceBoard.ShadowPiece = board.ShadowPiece; 
-              board.ActivePiece = temp;
-              board.ShadowPiece = shadow;
-              board.ActivePiece.GridRow = 0;
+          if (!board.Paused) {
+            if (!Swapped) {
+              if (heldPieceBoard.HeldPiece != null) {
+                Piece shadow = heldPieceBoard.ShadowPiece;
+                Piece temp = heldPieceBoard.HeldPiece;
+                heldPieceBoard.HeldPiece = board.ActivePiece;
+                heldPieceBoard.ShadowPiece = board.ShadowPiece;
+                board.ActivePiece = temp;
+                board.ShadowPiece = shadow;
+                board.ActivePiece.GridRow = 0;
+              }
+              else {
+                heldPieceBoard.HeldPiece = board.ActivePiece;
+                heldPieceBoard.ShadowPiece = board.ShadowPiece;
+                GetNewActiveandNextPiece();
+              }
+              board.Update();
+              UpdateGrid();
+              heldPieceBoard.Update();
+              UpdateHeldPieceGrid();
+              Swapped = true;
             }
-            else {
-              heldPieceBoard.HeldPiece = board.ActivePiece;
-              heldPieceBoard.ShadowPiece = board.ShadowPiece;
-              GetNewActiveandNextPiece();
-            }
-            board.Update();
-            UpdateGrid();
-            heldPieceBoard.Update();
-            UpdateHeldPieceGrid();
-            Swapped = true;
           }
           break;
 
         case Keys.Space:
-          board.DropPieceHard();
-          GetNewActiveandNextPiece();
-          board.Update();
-          UpdateGrid();
-          Swapped = false;
+          if (!board.Paused) {
+            board.DropPieceHard();
+            GetNewActiveandNextPiece();
+            board.Update();
+            UpdateGrid();
+            Swapped = false;
+          }
           break;
       }
     }
@@ -361,7 +365,7 @@ namespace Quadris {
     }
 
     private void btnQuadrisMuted_Click(object sender, EventArgs e) {
-      sndPlayer.Play();
+      sndPlayer.PlayLooping();
       btnQuadrisUnmuted.BringToFront();
       muted = false;
       this.Focus();
