@@ -198,11 +198,19 @@ namespace Quadris {
         if (board.GameOver) {
           sndPlayer.Stop();
           tmrFps.Stop();
-          MessageBox.Show("Game Over");
           updateLeaderboard();
-          this.Hide();
-          FormMenu formMenu = new FormMenu();
-          formMenu.Show();
+          String message = "Your score is " + board.Score.ToString() + ". Would you like to restart?";
+          DialogResult result = MessageBox.Show(message, "Game Over!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+          if (result == DialogResult.No) {
+            this.Close();
+            FormMenu formMenu = new FormMenu();
+            formMenu.Show();
+          }
+          else if (result == DialogResult.Yes) {
+            this.Close();
+            FrmMain newQuadrisGame = new FrmMain();
+            newQuadrisGame.Show();
+          }
         }
         if (heldPieceBoard.HeldPiece != null) {
           UpdateHeldPieceGrid();

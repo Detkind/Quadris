@@ -54,10 +54,10 @@ namespace Quadris {
       // 
       this.panBoard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
       this.panBoard.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.panBoard.Location = new System.Drawing.Point(188, 59);
+      this.panBoard.Location = new System.Drawing.Point(501, 141);
       this.panBoard.Margin = new System.Windows.Forms.Padding(0);
       this.panBoard.Name = "panBoard";
-      this.panBoard.Size = new System.Drawing.Size(200, 400);
+      this.panBoard.Size = new System.Drawing.Size(527, 948);
       this.panBoard.TabIndex = 1;
       // 
       // tmrFps
@@ -70,10 +70,10 @@ namespace Quadris {
       // 
       this.panelNextPiece.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
       this.panelNextPiece.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.panelNextPiece.Location = new System.Drawing.Point(38, 59);
+      this.panelNextPiece.Location = new System.Drawing.Point(101, 141);
       this.panelNextPiece.Margin = new System.Windows.Forms.Padding(0);
       this.panelNextPiece.Name = "panelNextPiece";
-      this.panelNextPiece.Size = new System.Drawing.Size(115, 128);
+      this.panelNextPiece.Size = new System.Drawing.Size(300, 300);
       this.panelNextPiece.TabIndex = 2;
       // 
       // lblNextPiece
@@ -81,9 +81,10 @@ namespace Quadris {
       this.lblNextPiece.AutoSize = true;
       this.lblNextPiece.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblNextPiece.ForeColor = System.Drawing.Color.White;
-      this.lblNextPiece.Location = new System.Drawing.Point(11, 25);
+      this.lblNextPiece.Location = new System.Drawing.Point(29, 60);
+      this.lblNextPiece.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
       this.lblNextPiece.Name = "lblNextPiece";
-      this.lblNextPiece.Size = new System.Drawing.Size(153, 31);
+      this.lblNextPiece.Size = new System.Drawing.Size(381, 78);
       this.lblNextPiece.TabIndex = 3;
       this.lblNextPiece.Text = "Next Piece:";
       this.lblNextPiece.UseMnemonic = false;
@@ -94,9 +95,10 @@ namespace Quadris {
       this.lblScore.BackColor = System.Drawing.Color.Transparent;
       this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblScore.ForeColor = System.Drawing.Color.White;
-      this.lblScore.Location = new System.Drawing.Point(183, 24);
+      this.lblScore.Location = new System.Drawing.Point(488, 57);
+      this.lblScore.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
       this.lblScore.Name = "lblScore";
-      this.lblScore.Size = new System.Drawing.Size(100, 31);
+      this.lblScore.Size = new System.Drawing.Size(245, 76);
       this.lblScore.TabIndex = 4;
       this.lblScore.Text = "Score: ";
       this.lblScore.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -107,9 +109,10 @@ namespace Quadris {
       this.lblScoreNum.BackColor = System.Drawing.Color.Transparent;
       this.lblScoreNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblScoreNum.ForeColor = System.Drawing.Color.White;
-      this.lblScoreNum.Location = new System.Drawing.Point(270, 24);
+      this.lblScoreNum.Location = new System.Drawing.Point(720, 57);
+      this.lblScoreNum.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
       this.lblScoreNum.Name = "lblScoreNum";
-      this.lblScoreNum.Size = new System.Drawing.Size(29, 31);
+      this.lblScoreNum.Size = new System.Drawing.Size(70, 76);
       this.lblScoreNum.TabIndex = 5;
       this.lblScoreNum.Text = "0";
       // 
@@ -119,10 +122,10 @@ namespace Quadris {
       this.lblLevel.BackColor = System.Drawing.Color.Transparent;
       this.lblLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblLevel.ForeColor = System.Drawing.Color.White;
-      this.lblLevel.Location = new System.Drawing.Point(188, 465);
+      this.lblLevel.Location = new System.Drawing.Point(501, 1109);
       this.lblLevel.Margin = new System.Windows.Forms.Padding(0);
       this.lblLevel.Name = "lblLevel";
-      this.lblLevel.Size = new System.Drawing.Size(94, 31);
+      this.lblLevel.Size = new System.Drawing.Size(229, 76);
       this.lblLevel.TabIndex = 6;
       this.lblLevel.Text = "Level: ";
       // 
@@ -132,10 +135,10 @@ namespace Quadris {
       this.lblLevelNum.BackColor = System.Drawing.Color.Transparent;
       this.lblLevelNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblLevelNum.ForeColor = System.Drawing.Color.White;
-      this.lblLevelNum.Location = new System.Drawing.Point(265, 465);
+      this.lblLevelNum.Location = new System.Drawing.Point(707, 1109);
       this.lblLevelNum.Margin = new System.Windows.Forms.Padding(0);
       this.lblLevelNum.Name = "lblLevelNum";
-      this.lblLevelNum.Size = new System.Drawing.Size(29, 31);
+      this.lblLevelNum.Size = new System.Drawing.Size(70, 76);
       this.lblLevelNum.TabIndex = 7;
       this.lblLevelNum.Text = "1";
       // 
@@ -151,20 +154,20 @@ namespace Quadris {
       this.panel1.Controls.Add(this.label10);
       this.panel1.Controls.Add(this.label9);
       this.panel1.Controls.Add(this.label8);
-      this.panel1.Location = new System.Drawing.Point(26, 303);
-      this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+      this.panel1.Location = new System.Drawing.Point(69, 723);
+      this.panel1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(142, 193);
+      this.panel1.Size = new System.Drawing.Size(372, 455);
       this.panel1.TabIndex = 8;
       // 
       // label16
       // 
       this.label16.AutoSize = true;
       this.label16.ForeColor = System.Drawing.Color.White;
-      this.label16.Location = new System.Drawing.Point(25, 160);
-      this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label16.Location = new System.Drawing.Point(67, 382);
+      this.label16.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(53, 13);
+      this.label16.Size = new System.Drawing.Size(137, 32);
       this.label16.TabIndex = 7;
       this.label16.Text = "P : Pause";
       // 
@@ -172,10 +175,10 @@ namespace Quadris {
       // 
       this.label15.AutoSize = true;
       this.label15.ForeColor = System.Drawing.Color.White;
-      this.label15.Location = new System.Drawing.Point(25, 140);
-      this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label15.Location = new System.Drawing.Point(67, 334);
+      this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(45, 13);
+      this.label15.Size = new System.Drawing.Size(116, 32);
       this.label15.TabIndex = 6;
       this.label15.Text = "C : Hold";
       // 
@@ -183,10 +186,10 @@ namespace Quadris {
       // 
       this.label13.AutoSize = true;
       this.label13.ForeColor = System.Drawing.Color.White;
-      this.label13.Location = new System.Drawing.Point(25, 120);
-      this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label13.Location = new System.Drawing.Point(67, 286);
+      this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(96, 13);
+      this.label13.Size = new System.Drawing.Size(247, 32);
       this.label13.TabIndex = 5;
       this.label13.Text = "Space : Drop Hard";
       // 
@@ -194,10 +197,10 @@ namespace Quadris {
       // 
       this.label12.AutoSize = true;
       this.label12.ForeColor = System.Drawing.Color.White;
-      this.label12.Location = new System.Drawing.Point(25, 100);
-      this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label12.Location = new System.Drawing.Point(67, 238);
+      this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(67, 13);
+      this.label12.Size = new System.Drawing.Size(170, 32);
       this.label12.TabIndex = 4;
       this.label12.Text = "↓ : Drop Soft";
       // 
@@ -205,10 +208,10 @@ namespace Quadris {
       // 
       this.label11.AutoSize = true;
       this.label11.ForeColor = System.Drawing.Color.White;
-      this.label11.Location = new System.Drawing.Point(25, 80);
-      this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label11.Location = new System.Drawing.Point(67, 191);
+      this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(82, 13);
+      this.label11.Size = new System.Drawing.Size(208, 32);
       this.label11.TabIndex = 3;
       this.label11.Text = "→ : Move Right";
       // 
@@ -216,10 +219,10 @@ namespace Quadris {
       // 
       this.label10.AutoSize = true;
       this.label10.ForeColor = System.Drawing.Color.White;
-      this.label10.Location = new System.Drawing.Point(25, 60);
-      this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label10.Location = new System.Drawing.Point(67, 143);
+      this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(75, 13);
+      this.label10.Size = new System.Drawing.Size(189, 32);
       this.label10.TabIndex = 2;
       this.label10.Text = "← : Move Left";
       // 
@@ -227,10 +230,10 @@ namespace Quadris {
       // 
       this.label9.AutoSize = true;
       this.label9.ForeColor = System.Drawing.Color.White;
-      this.label9.Location = new System.Drawing.Point(25, 40);
-      this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label9.Location = new System.Drawing.Point(67, 95);
+      this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(83, 13);
+      this.label9.Size = new System.Drawing.Size(214, 32);
       this.label9.TabIndex = 1;
       this.label9.Text = "X : Rotate Right";
       // 
@@ -238,10 +241,10 @@ namespace Quadris {
       // 
       this.label8.AutoSize = true;
       this.label8.ForeColor = System.Drawing.Color.White;
-      this.label8.Location = new System.Drawing.Point(25, 20);
-      this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+      this.label8.Location = new System.Drawing.Point(67, 48);
+      this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.label8.Name = "label8";
-      this.label8.Size = new System.Drawing.Size(76, 13);
+      this.label8.Size = new System.Drawing.Size(193, 32);
       this.label8.TabIndex = 0;
       this.label8.Text = "Z : Rotate Left";
       // 
@@ -249,10 +252,10 @@ namespace Quadris {
       // 
       this.panel2HeldPiece.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
       this.panel2HeldPiece.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.panel2HeldPiece.Location = new System.Drawing.Point(450, 59);
+      this.panel2HeldPiece.Location = new System.Drawing.Point(1200, 141);
       this.panel2HeldPiece.Margin = new System.Windows.Forms.Padding(0);
       this.panel2HeldPiece.Name = "panel2HeldPiece";
-      this.panel2HeldPiece.Size = new System.Drawing.Size(115, 128);
+      this.panel2HeldPiece.Size = new System.Drawing.Size(300, 300);
       this.panel2HeldPiece.TabIndex = 9;
       // 
       // label14
@@ -260,9 +263,10 @@ namespace Quadris {
       this.label14.AutoSize = true;
       this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label14.ForeColor = System.Drawing.Color.White;
-      this.label14.Location = new System.Drawing.Point(424, 25);
+      this.label14.Location = new System.Drawing.Point(1131, 60);
+      this.label14.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
       this.label14.Name = "label14";
-      this.label14.Size = new System.Drawing.Size(153, 31);
+      this.label14.Size = new System.Drawing.Size(382, 78);
       this.label14.TabIndex = 10;
       this.label14.Text = "Hold Piece:";
       this.label14.UseMnemonic = false;
@@ -271,9 +275,10 @@ namespace Quadris {
       // 
       this.btnQuadrisUnmuted.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnQuadrisUnmuted.Image = global::Quadris.Properties.Resources.unmuteIcon;
-      this.btnQuadrisUnmuted.Location = new System.Drawing.Point(15, 595);
+      this.btnQuadrisUnmuted.Location = new System.Drawing.Point(40, 1419);
+      this.btnQuadrisUnmuted.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
       this.btnQuadrisUnmuted.Name = "btnQuadrisUnmuted";
-      this.btnQuadrisUnmuted.Size = new System.Drawing.Size(30, 30);
+      this.btnQuadrisUnmuted.Size = new System.Drawing.Size(80, 72);
       this.btnQuadrisUnmuted.TabIndex = 11;
       this.btnQuadrisUnmuted.TabStop = false;
       this.btnQuadrisUnmuted.UseVisualStyleBackColor = true;
@@ -283,9 +288,10 @@ namespace Quadris {
       // 
       this.btnQuadrisMuted.Cursor = System.Windows.Forms.Cursors.Hand;
       this.btnQuadrisMuted.Image = global::Quadris.Properties.Resources.muteIcon;
-      this.btnQuadrisMuted.Location = new System.Drawing.Point(15, 595);
+      this.btnQuadrisMuted.Location = new System.Drawing.Point(40, 1419);
+      this.btnQuadrisMuted.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
       this.btnQuadrisMuted.Name = "btnQuadrisMuted";
-      this.btnQuadrisMuted.Size = new System.Drawing.Size(30, 30);
+      this.btnQuadrisMuted.Size = new System.Drawing.Size(80, 72);
       this.btnQuadrisMuted.TabIndex = 12;
       this.btnQuadrisMuted.TabStop = false;
       this.btnQuadrisMuted.UseVisualStyleBackColor = true;
@@ -293,18 +299,20 @@ namespace Quadris {
       // 
       // textBox1
       // 
-      this.textBox1.Location = new System.Drawing.Point(430, 543);
+      this.textBox1.BackColor = System.Drawing.Color.Black;
+      this.textBox1.Location = new System.Drawing.Point(1147, 1295);
+      this.textBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
       this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(0, 20);
+      this.textBox1.Size = new System.Drawing.Size(0, 38);
       this.textBox1.TabIndex = 13;
       // 
       // FrmMain
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.BackColor = System.Drawing.Color.Black;
-      this.ClientSize = new System.Drawing.Size(604, 645);
+      this.ClientSize = new System.Drawing.Size(1611, 1538);
       this.Controls.Add(this.textBox1);
       this.Controls.Add(this.btnQuadrisUnmuted);
       this.Controls.Add(this.btnQuadrisMuted);
@@ -318,6 +326,7 @@ namespace Quadris {
       this.Controls.Add(this.lblNextPiece);
       this.Controls.Add(this.panelNextPiece);
       this.Controls.Add(this.panBoard);
+      this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
       this.MaximizeBox = false;
       this.Name = "FrmMain";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
