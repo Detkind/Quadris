@@ -52,7 +52,7 @@ namespace Quadris {
 	}
 
     private void FrmMain_Load(object sender, EventArgs e) {
-      this.Size = new Size(480, 680);
+      this.Size = new Size(600, 680);
       // instantiate boards
       Swapped = false;
       board = new Board();
@@ -115,6 +115,7 @@ namespace Quadris {
         }
       }
     }
+
     private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
@@ -253,11 +254,9 @@ namespace Quadris {
           board.ChangePause();
           break;
 
-        case Keys.Space:
-          if (!Swapped)
-          {
-            if (heldPieceBoard.HeldPiece != null)
-            {
+        case Keys.C:
+          if (!Swapped) {
+            if (heldPieceBoard.HeldPiece != null) {
               Piece shadow = heldPieceBoard.ShadowPiece;
               Piece temp = heldPieceBoard.HeldPiece;
               heldPieceBoard.HeldPiece = board.ActivePiece;
@@ -278,57 +277,15 @@ namespace Quadris {
             Swapped = true;
           }
           break;
+
+        case Keys.Space:
+          board.DropPieceHard();
+          GetNewActiveandNextPiece();
+          board.Update();
+          UpdateGrid();
+          Swapped = false;
+          break;
       }
     }
-
-    private void panBoard_Paint(object sender, PaintEventArgs e) {
-
-    }
-
-    private void label1_Click(object sender, EventArgs e) {
-
-    }
-
-    private void lblNextPiece_Click(object sender, EventArgs e) {
-
-    }
-
-    private void label1_Click_1(object sender, EventArgs e) {
-
-    }
-
-    private void FrmMain_KeyUp(object sender, KeyEventArgs e) {
-
-    }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-	private void label14_Click(object sender, EventArgs e)
-	{
-
-	}
-
-	private void label14_Click_1(object sender, EventArgs e)
-	{
-
-	}
-
-	private void panel2HeldPiece_Paint(object sender, PaintEventArgs e)
-	{
-
-	}
   }
 }

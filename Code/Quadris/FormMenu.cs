@@ -47,7 +47,11 @@ namespace Quadris {
     }
 
     private void btnQuitQuadris_Click(object sender, EventArgs e) {
+      this.Close();
+    }
 
+    private void btnQuitTrollris_Click(object sender, EventArgs e) {
+      this.Close();
     }
   }
 }
