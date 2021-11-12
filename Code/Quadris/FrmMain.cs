@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Quadris {
   public partial class FrmMain : Form {
@@ -194,6 +195,7 @@ namespace Quadris {
         if (board.GameOver) {
             tmrFps.Stop();
             MessageBox.Show("Game Over");
+            updateLeaderboard();
             this.Hide();
             FormMenu formMenu = new FormMenu();
             formMenu.Show();
@@ -287,5 +289,64 @@ namespace Quadris {
           break;
       }
     }
-  }
+
+        private void updateLeaderboard()
+        {
+            try
+            {
+                string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                string path = dir.Remove(dir.Length - 10, 10) + "\\HighScore.txt";
+
+                if (!File.Exists(path))
+                {
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        for (int x = 0; x < 10; x++)
+                        {
+                            sw.WriteLine("0000");
+                        }
+                    }
+                }
+
+                List<int> scores = new List<int>();
+                int score;
+                int bumpedScore = board.Score;
+                using (StreamReader sr = File.OpenText(path))
+                {
+
+                    for (int x = 0; x < 10; x++)
+                    {
+                        score = int.Parse(sr.ReadLine());
+                        if (x < 5) {
+                            if (bumpedScore > score)
+                            {
+                                scores.Add(bumpedScore);
+                                bumpedScore = score;
+                            }
+                            else
+                            {
+                                scores.Add(score);
+                            }
+                        }
+                        else
+                        {
+                            scores.Add(score);
+                        }
+                    }
+                }
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    for (int x = 0; x < 10; x++)
+                    {
+                        sw.WriteLine(scores[x]);
+                    }
+                } 
+
+            }
+            catch (Exception e) { }
+        }
+
+    }
 }
