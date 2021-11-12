@@ -87,12 +87,13 @@ namespace Quadris {
             try
             {
                 string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                string path = dir.Remove(dir.Length - 10,10) + "\\HighScore.txt";
-                //string dir = System.IO.Path.GetFullPath("HighScore.txt");
-                //string
-                //StreamReader sr = new StreamReader("HighScore.txt");
+                
+                while(dir.Substring(dir.Length - "Quadris".Length) != "Quadris")
+                {
+                    dir = dir.Remove(dir.Length - 1,1);
+                }
 
-                //FileInfo file = new FileInfo("HighScore.txt");
+                string path = dir + "\\HighScore.txt";
 
                 List<Label> Scores = new List<Label>();
                 Scores.Add(lblLeaderScore1);

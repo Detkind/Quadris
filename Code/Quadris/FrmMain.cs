@@ -295,7 +295,13 @@ namespace Quadris {
             try
             {
                 string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                string path = dir.Remove(dir.Length - 10, 10) + "\\HighScore.txt";
+
+                while (dir.Substring(dir.Length - "Quadris".Length) != "Quadris")
+                {
+                    dir = dir.Remove(dir.Length - 1, 1);
+                }
+
+                string path = dir + "\\HighScore.txt";
 
                 if (!File.Exists(path))
                 {
