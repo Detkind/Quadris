@@ -31,6 +31,8 @@ namespace Quadris {
 
     private SoundPlayer sndPlayer;
     private bool muted;
+    private bool inverted;
+    private Random trollRandomizer;
 
     private static readonly Dictionary<PieceColorTrollris, Image> pieceColorToImgMap = new Dictionary<PieceColorTrollris, Image> {
       {PieceColorTrollris.BLUE, Resources.cell_blue},
@@ -76,6 +78,8 @@ namespace Quadris {
       sndPlayer = new SoundPlayer(Resources.bg_music);
       sndPlayer.PlayLooping();
       muted = false;
+      inverted = false;
+      trollRandomizer = new Random();
     }
 
     private void CreateGrid() {
@@ -197,7 +201,7 @@ namespace Quadris {
         if (board.GameOver) {
           sndPlayer.Stop();
           tmrFps.Stop();
-          //updateLeaderboard();
+          updateLeaderboard();
           String message = "Your score is " + board.Score.ToString() + ". Would you like to restart?";
           DialogResult result = MessageBox.Show(message, "Game Over!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
           if (result == DialogResult.No) {
@@ -220,6 +224,12 @@ namespace Quadris {
         if (settled) {
           Swapped = false;
           GetNewActiveandNextPiece();
+        }
+
+        // check to see if a troll will occur adn enact that troll
+        if(trollRandomizer.Next(50) == 1)
+        {
+            triggerTroll(getTroll());
         }
 
         UpdateGrid();
@@ -247,14 +257,28 @@ namespace Quadris {
 
         case Keys.Right:
           if (!board.Paused) {
-            board.MoveActivePieceRight();
+            if (!inverted)
+            {
+              board.MoveActivePieceRight();
+            }
+            else
+            {
+              board.MoveActivePieceLeft();
+            }
             UpdateGrid();
           }
           break;
 
         case Keys.Left:
           if (!board.Paused) {
-            board.MoveActivePieceLeft();
+            if (!inverted)
+            {
+              board.MoveActivePieceLeft();
+            }
+            else
+            {
+              board.MoveActivePieceRight();
+            }
             UpdateGrid();
           }
           break;
@@ -315,6 +339,64 @@ namespace Quadris {
       }
     }
 
+    private int getTroll()
+    {
+            int troll = trollRandomizer.Next(1,5);
+
+            return troll;
+    }
+    private void triggerTroll(int troll)
+    {
+
+        switch (troll)
+        {
+            case 1: inverted = !inverted; break;
+            case 2:
+                board.DropPieceHard();
+                GetNewActiveandNextPiece();
+                board.Update();
+                UpdateGrid();
+                Swapped = false; break;
+            case 3:
+                if (!Swapped)
+                {
+                    if (heldPieceBoard.HeldPiece != null)
+                    {
+                        PieceTrollris shadow = heldPieceBoard.ShadowPiece;
+                        PieceTrollris temp = heldPieceBoard.HeldPiece;
+                        heldPieceBoard.HeldPiece = board.ActivePiece;
+                        heldPieceBoard.ShadowPiece = board.ShadowPiece;
+                        board.ActivePiece = temp;
+                        board.ShadowPiece = shadow;
+                        board.ActivePiece.GridRow = 0;
+                    }
+                    else
+                    {
+                        heldPieceBoard.HeldPiece = board.ActivePiece;
+                        heldPieceBoard.ShadowPiece = board.ShadowPiece;
+                        GetNewActiveandNextPiece();
+                    }
+                    board.Update();
+                    UpdateGrid();
+                    heldPieceBoard.Update();
+                    UpdateHeldPieceGrid();
+                    Swapped = true;
+                }
+                break;
+                case 4:
+                    if (trollRandomizer.Next(1) == 1)
+                    {
+                      board.RotateActivePieceLeft();
+                    }
+                    else
+                    {
+                        board.RotateActivePieceRight();
+                    }
+                    UpdateGrid(); break;
+        default: break;
+        }
+    }
+
     private void updateLeaderboard() {
       try {
         string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -340,7 +422,7 @@ namespace Quadris {
         using (StreamReader sr = File.OpenText(path)) {
           for (int x = 0; x < 10; x++) {
             score = int.Parse(sr.ReadLine());
-            if (x < 5) {
+            if (x > 4) {
               if (bumpedScore > score) {
                 scores.Add(bumpedScore);
                 bumpedScore = score;
