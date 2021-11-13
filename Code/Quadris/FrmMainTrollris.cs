@@ -8,12 +8,12 @@ using System.Windows.Forms;
 using System.IO;
 
 namespace Quadris {
-  public partial class FrmMain : Form {
-	private const int BOARD_COLS = 10;  // number of columns for the main board
-	private const int BOARD_ROWS = 20;  // number of rows for the main board
+  public partial class FrmMainTrollris : Form {
+    private const int BOARD_COLS = 10;  // number of columns for the main board
+    private const int BOARD_ROWS = 20;  // number of rows for the main board
 
-	private const int CELL_WIDTH = 20; // width of each individual cell
-	private const int CELL_HEIGHT = 20; // height of each individual cell
+    private const int CELL_WIDTH = 20; // width of each individual cell
+    private const int CELL_HEIGHT = 20; // height of each individual cell
 
     private const int NEXTPIECE_COLS = 4; // number of columns for the next piece board
     private const int NEXTPIECE_ROWS = 4; // number of rows for the next piece board
@@ -25,54 +25,54 @@ namespace Quadris {
     private Label[,] gridControls; // main board grid which is displayed
     private Label[,] nextPieceGridControls; // next piece grid which is displayed
     private Label[,] heldPieceGridControls;
-	private Board board; // main board
-    private NextPieceBoard nextPieceBoard; // next piece board
-    private HeldPieceBoard heldPieceBoard;
+    private BoardTrollris board; // main board
+    private NextPieceBoardTrollris nextPieceBoard; // next piece board
+    private HeldPieceBoardTrollris heldPieceBoard;
 
     private SoundPlayer sndPlayer;
     private bool muted;
 
-	private static readonly Dictionary<PieceColor, Image> pieceColorToImgMap = new Dictionary<PieceColor, Image> {
-	  {PieceColor.BLUE, Resources.cell_blue},
-	  {PieceColor.CYAN, Resources.cell_cyan},
-	  {PieceColor.GREEN, Resources.cell_green},
-	  {PieceColor.ORANGE, Resources.cell_orange},
-	  {PieceColor.PURPLE, Resources.cell_purple},
-	  {PieceColor.RED, Resources.cell_red},
-	  {PieceColor.YELLOW, Resources.cell_yellow},
-      {PieceColor.SHADOW_BLUE, Resources.cell_blue_shadow},
-	  {PieceColor.SHADOW_CYAN, Resources.cell_cyan_shadow},
-	  {PieceColor.SHADOW_GREEN, Resources.cell_green_shadow},
-	  {PieceColor.SHADOW_ORANGE, Resources.cell_orange_shadow},
-	  {PieceColor.SHADOW_PURPLE, Resources.cell_purple_shadow},
-	  {PieceColor.SHADOW_RED, Resources.cell_red_shadow},
-	  {PieceColor.SHADOW_YELLOW, Resources.cell_yellow_shadow}
-	};
+    private static readonly Dictionary<PieceColorTrollris, Image> pieceColorToImgMap = new Dictionary<PieceColorTrollris, Image> {
+      {PieceColorTrollris.BLUE, Resources.cell_blue},
+      {PieceColorTrollris.CYAN, Resources.cell_cyan},
+      {PieceColorTrollris.GREEN, Resources.cell_green},
+      {PieceColorTrollris.ORANGE, Resources.cell_orange},
+      {PieceColorTrollris.PURPLE, Resources.cell_purple},
+      {PieceColorTrollris.RED, Resources.cell_red},
+      {PieceColorTrollris.YELLOW, Resources.cell_yellow},
+      {PieceColorTrollris.SHADOW_BLUE, Resources.cell_blue_shadow},
+      {PieceColorTrollris.SHADOW_CYAN, Resources.cell_cyan_shadow},
+      {PieceColorTrollris.SHADOW_GREEN, Resources.cell_green_shadow},
+      {PieceColorTrollris.SHADOW_ORANGE, Resources.cell_orange_shadow},
+      {PieceColorTrollris.SHADOW_PURPLE, Resources.cell_purple_shadow},
+      {PieceColorTrollris.SHADOW_RED, Resources.cell_red_shadow},
+      {PieceColorTrollris.SHADOW_YELLOW, Resources.cell_yellow_shadow}
+    };
 
-	public FrmMain() {
-	  InitializeComponent();
-	}
+    public FrmMainTrollris() {
+      InitializeComponent();
+    }
 
-    private void FrmMain_Load(object sender, EventArgs e) {
+    private void FrmMainTrollris_Load(object sender, EventArgs e) {
       this.Size = new Size(600, 680);
       this.KeyPreview = true;
       // instantiate boards
       Swapped = false;
-      board = new Board();
-      nextPieceBoard = new NextPieceBoard();
-      heldPieceBoard = new HeldPieceBoard();
+      board = new BoardTrollris();
+      nextPieceBoard = new NextPieceBoardTrollris();
+      heldPieceBoard = new HeldPieceBoardTrollris();
       // get first piece and set it as main board's active piece
-      Piece piece = Piece.GetRandPiece();
+      PieceTrollris piece = PieceTrollris.GetRandPiece();
       board.ActivePiece = piece;
-      board.ShadowPiece = Piece.MakeShadowPieceCopy(piece);
+      board.ShadowPiece = PieceTrollris.MakeShadowPieceCopy(piece);
       // get next piece and set it as the next piece board's next piece
-      Piece nextPiece = Piece.GetRandPiece();
+      PieceTrollris nextPiece = PieceTrollris.GetRandPiece();
       nextPieceBoard.NextPiece = nextPiece;
       // create main grid and next piece grid
       CreateGrid();
       CreateNextPieceGrid();
       CreateHeldPieceGrid();
-   
+
       sndPlayer = new SoundPlayer(Resources.bg_music);
       sndPlayer.PlayLooping();
       muted = false;
@@ -123,8 +123,8 @@ namespace Quadris {
     private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
-          GridCellInfo cellInfo = nextPieceBoard.Grid[row, col];
-          if (cellInfo.State == CellState.OCCUPIED_NEXT_PIECE) {
+          GridCellInfoTrollris cellInfo = nextPieceBoard.Grid[row, col];
+          if (cellInfo.State == CellStateTrollris.OCCUPIED_NEXT_PIECE) {
             nextPieceGridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
           else {
@@ -137,8 +137,8 @@ namespace Quadris {
     private void UpdateHeldPieceGrid() {
       for (int col = 0; col < HELDPIECE_COLS; col++) {
         for (int row = 0; row < HELDPIECE_ROWS; row++) {
-          GridCellInfo cellInfo = heldPieceBoard.Grid[row, col];
-          if (cellInfo.State == CellState.OCCUPIED_HELD_PIECE) {
+          GridCellInfoTrollris cellInfo = heldPieceBoard.Grid[row, col];
+          if (cellInfo.State == CellStateTrollris.OCCUPIED_HELD_PIECE) {
             heldPieceGridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
           else {
@@ -151,8 +151,8 @@ namespace Quadris {
     private void UpdateGrid() {
       for (int col = 0; col < BOARD_COLS; col++) {
         for (int row = 0; row < BOARD_ROWS; row++) {
-          GridCellInfo cellInfo = board.Grid[row + 4, col];
-          if (cellInfo.State == CellState.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellState.OCCUPIED_PREVIOUSLY || cellInfo.State == CellState.OCCUPIED_SHADOW_PIECE) {
+          GridCellInfoTrollris cellInfo = board.Grid[row + 4, col];
+          if (cellInfo.State == CellStateTrollris.OCCUPIED_ACTIVE_PIECE || cellInfo.State == CellStateTrollris.OCCUPIED_PREVIOUSLY || cellInfo.State == CellStateTrollris.OCCUPIED_SHADOW_PIECE) {
             gridControls[row, col].Image = pieceColorToImgMap[cellInfo.Color];
           }
           else {
@@ -183,8 +183,8 @@ namespace Quadris {
 
     private void GetNewActiveandNextPiece() {
       board.ActivePiece = nextPieceBoard.NextPiece;
-      board.ShadowPiece = Piece.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
-      nextPieceBoard.NextPiece = Piece.GetRandPiece();
+      board.ShadowPiece = PieceTrollris.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
+      nextPieceBoard.NextPiece = PieceTrollris.GetRandPiece();
       UpdateGrid();
     }
 
@@ -197,7 +197,7 @@ namespace Quadris {
         if (board.GameOver) {
           sndPlayer.Stop();
           tmrFps.Stop();
-          updateLeaderboard();
+          //updateLeaderboard();
           String message = "Your score is " + board.Score.ToString() + ". Would you like to restart?";
           DialogResult result = MessageBox.Show(message, "Game Over!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
           if (result == DialogResult.No) {
@@ -207,15 +207,15 @@ namespace Quadris {
           }
           else if (result == DialogResult.Yes) {
             this.Close();
-            FrmMain newQuadrisGame = new FrmMain();
-            newQuadrisGame.Show();
+            FrmMainTrollris newTrollrisGame = new FrmMainTrollris();
+            newTrollrisGame.Show();
           }
         }
         if (heldPieceBoard.HeldPiece != null) {
           UpdateHeldPieceGrid();
         }
         nextPieceBoard.Update();
-        
+
         // set active piece to next piece and create new shadow piece and new next piece once a piece has been settled
         if (settled) {
           Swapped = false;
@@ -230,7 +230,7 @@ namespace Quadris {
     }
 
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
-	  switch (e.KeyCode) {
+      switch (e.KeyCode) {
         case Keys.X:
           if (!board.Paused) {
             board.RotateActivePieceRight();
@@ -259,8 +259,8 @@ namespace Quadris {
           }
           break;
 
-		case Keys.Down:
-		  tmrFps.Interval = 50;
+        case Keys.Down:
+          tmrFps.Interval = 50;
           break;
 
         case Keys.P:
@@ -281,8 +281,8 @@ namespace Quadris {
           if (!board.Paused) {
             if (!Swapped) {
               if (heldPieceBoard.HeldPiece != null) {
-                Piece shadow = heldPieceBoard.ShadowPiece;
-                Piece temp = heldPieceBoard.HeldPiece;
+                PieceTrollris shadow = heldPieceBoard.ShadowPiece;
+                PieceTrollris temp = heldPieceBoard.HeldPiece;
                 heldPieceBoard.HeldPiece = board.ActivePiece;
                 heldPieceBoard.ShadowPiece = board.ShadowPiece;
                 board.ActivePiece = temp;
@@ -359,19 +359,19 @@ namespace Quadris {
           for (int x = 0; x < 10; x++) {
             sw.WriteLine(scores[x]);
           }
-        } 
+        }
       }
       catch (Exception e) { }
     }
 
-    private void btnQuadrisUnmuted_Click(object sender, EventArgs e) {
+    private void btnTrollrisUnmuted_Click(object sender, EventArgs e) {
       sndPlayer.Stop();
       btnQuadrisMuted.BringToFront();
       muted = true;
       this.Focus();
     }
 
-    private void btnQuadrisMuted_Click(object sender, EventArgs e) {
+    private void btnTrollrisMuted_Click(object sender, EventArgs e) {
       sndPlayer.PlayLooping();
       btnQuadrisUnmuted.BringToFront();
       muted = false;

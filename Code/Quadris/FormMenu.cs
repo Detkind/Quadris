@@ -35,6 +35,12 @@ namespace Quadris {
       this.Hide();
     }
 
+    private void btnStartTrollris_Click(object sender, EventArgs e) {
+      FrmMainTrollris trollrisGameForm = new FrmMainTrollris();
+      trollrisGameForm.Show();
+      this.Hide();
+    }
+
     private void btnSwitchToTrollris_Click(object sender, EventArgs e) {
       if (index < listPanel.Count - 1) {
         listPanel[++index].BringToFront();
