@@ -41,6 +41,7 @@ namespace Quadris {
     public bool[,] Layout { get; private set; }
     public int GridRow { get; set; }
     public int GridCol { get; set; }
+    public static int StartPos { get; set; }
     public PieceTypeTrollris Type { get; private set; }
     public PieceColorTrollris Color { get; private set; }
 
@@ -81,6 +82,8 @@ namespace Quadris {
         case PieceTypeTrollris.T: piece = new PieceTrollris("0000001001110000", PieceColorTrollris.PURPLE, PieceTypeTrollris.T); break;
         case PieceTypeTrollris.O: piece = new PieceTrollris("0000011001100000", PieceColorTrollris.YELLOW, PieceTypeTrollris.O); break;
       }
+      StartPos = rand.Next(6);
+      piece.GridCol = StartPos;
       return piece;
     }
 
@@ -95,6 +98,7 @@ namespace Quadris {
         case PieceTypeTrollris.T: shadowPiece = new PieceTrollris("0000001001110000", PieceColorTrollris.SHADOW_PURPLE, PieceTypeTrollris.T); break;
         case PieceTypeTrollris.O: shadowPiece = new PieceTrollris("0000011001100000", PieceColorTrollris.SHADOW_YELLOW, PieceTypeTrollris.O); break;
       }
+      shadowPiece.GridCol = StartPos;
       return shadowPiece;
     }
 

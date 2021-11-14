@@ -33,6 +33,7 @@ namespace Quadris {
     private bool muted;
     private bool inverted;
     private Random trollRandomizer;
+    private int trollBase;
 
     private static readonly Dictionary<PieceColorTrollris, Image> pieceColorToImgMap = new Dictionary<PieceColorTrollris, Image> {
       {PieceColorTrollris.BLUE, Resources.cell_blue},
@@ -80,6 +81,7 @@ namespace Quadris {
       muted = false;
       inverted = false;
       trollRandomizer = new Random();
+      trollBase = 50;
     }
 
     private void CreateGrid() {
@@ -224,10 +226,13 @@ namespace Quadris {
         if (settled) {
           Swapped = false;
           GetNewActiveandNextPiece();
+          int startPos = trollRandomizer.Next(6);
+                    board.ActivePiece.GridCol = startPos;
+                    board.ShadowPiece.GridCol = startPos;
         }
 
-        // check to see if a troll will occur adn enact that troll
-        if(trollRandomizer.Next(50) == 1)
+        // check to see if a troll will occur and enact that troll
+        if(trollRandomizer.Next(trollBase/board.Level) == 1)
         {
             triggerTroll(getTroll());
         }
@@ -383,16 +388,16 @@ namespace Quadris {
                     Swapped = true;
                 }
                 break;
-                case 4:
-                    if (trollRandomizer.Next(1) == 1)
-                    {
-                      board.RotateActivePieceLeft();
-                    }
-                    else
-                    {
-                        board.RotateActivePieceRight();
-                    }
-                    UpdateGrid(); break;
+            case 4:
+                if (trollRandomizer.Next(1) == 1)
+                {
+                    board.RotateActivePieceLeft();
+                }
+                else
+                {
+                    board.RotateActivePieceRight();
+                }
+                UpdateGrid(); break;
         default: break;
         }
     }
@@ -446,12 +451,10 @@ namespace Quadris {
       catch (Exception e) { }
     }
 
-    private void btnTrollrisUnmuted_Click(object sender, EventArgs e) {
-      sndPlayer.Stop();
-      btnQuadrisMuted.BringToFront();
-      muted = true;
-      this.Focus();
-    }
+        private void btnTrollrisUnmuted_Click(object sender, EventArgs e)
+        {
+            if (trollBase > 10){ trollBase -= 10; }
+        }
 
     private void btnTrollrisMuted_Click(object sender, EventArgs e) {
       sndPlayer.PlayLooping();
