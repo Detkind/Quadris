@@ -71,6 +71,7 @@ namespace Quadris {
       return MakePiece((PieceTypeTrollris)pieceNum);
     }
 
+    //Function that returns a random piece with a random starting position
     public static PieceTrollris MakePiece(PieceTypeTrollris type) {
       PieceTrollris piece = null;
       switch (type) {
@@ -87,6 +88,7 @@ namespace Quadris {
       return piece;
     }
 
+    //Returns a copy of the given piece
     public static PieceTrollris MakeShadowPieceCopy(PieceTrollris piece) {
       PieceTrollris shadowPiece = null;
       switch (piece.Type) {
@@ -102,6 +104,7 @@ namespace Quadris {
       return shadowPiece;
     }
 
+    //Function that rotates the active piece right
     public void RotateRight() {
       bool[] read = Layout.Cast<bool>().ToArray();
       bool[] write = new bool[read.Length];
@@ -130,6 +133,7 @@ namespace Quadris {
       }
     }
 
+    //Function that rotates the active piece left
     public void RotateLeft() {
       bool[] read = Layout.Cast<bool>().ToArray();
       bool[] write = new bool[read.Length];

@@ -25,26 +25,31 @@ namespace Quadris {
       Reset();
     }
 
+    //Function that empties a grid cell
     public void Reset() {
       Color = PieceColorTrollris.NONE;
       State = CellStateTrollris.EMPTY;
     }
 
+    //Function that turns the given piece into the active piece
     public void SetToActivePiece(PieceTrollris activePiece) {
       State = CellStateTrollris.OCCUPIED_ACTIVE_PIECE;
       Color = activePiece.Color;
     }
 
+    //Function that sets the given piece to the current shadow piece
     public void SetToShadowPiece(PieceTrollris shadowPiece) {
       State = CellStateTrollris.OCCUPIED_SHADOW_PIECE;
       Color = shadowPiece.Color; 
     }
 
+    //Function that sets the next piece to the given piece
     public void SetToNextPiece(PieceTrollris nextPiece) {
       State = CellStateTrollris.OCCUPIED_NEXT_PIECE;
       Color = nextPiece.Color;
     }
 
+    //Function that sets the held piece to the given pice
     public void SetToHeldPiece(PieceTrollris heldPiece) {
       State = CellStateTrollris.OCCUPIED_HELD_PIECE;
       Color = heldPiece.Color; 
@@ -96,6 +101,7 @@ namespace Quadris {
       return settled;
     }
 
+    //Fuction that determines when an end state has been reached
     public bool IsGameOver() {
       for (int row = 0; row < ActivePiece.Layout.GetLength(0); row++) {
         for (int col = 0; col < ActivePiece.Layout.GetLength(1); col++) {
@@ -107,6 +113,7 @@ namespace Quadris {
       return false;
     }
 
+    //Function that updates the position of the shadow piece
     public void UpdateShadow() {
       ShadowPiece.GridRow = ActivePiece.GridRow;
       while (ShadowPieceCanMove()) {
@@ -115,6 +122,7 @@ namespace Quadris {
       }
     }
 
+    //Function that updates the grid cells to reflect the position of the shadow piece
     private void RefreshGridWithShadowPiece() {
       for (int r = 0; r < Grid.GetLength(0); r++) {
         for (int c = 0; c < Grid.GetLength(1); c++) {
@@ -134,6 +142,7 @@ namespace Quadris {
       }
     }
 
+    //Function that updates the grid cells to reflect the position of the active piece
     private void RefreshGridWithActivePiece() {
       for (int r = 0; r < Grid.GetLength(0); r++) {
         for (int c = 0; c < Grid.GetLength(1); c++) {
@@ -166,6 +175,7 @@ namespace Quadris {
         return Grid[row, col];
     }
 
+    //Function that shifts the active piece over one column to the left if possible
     public void MoveActivePieceLeft() {
       if (ActivePieceCanMove(MoveDirTrollris.LEFT)) {
         ActivePiece.MoveLeft();
@@ -175,6 +185,7 @@ namespace Quadris {
       }
     }
 
+    //Function that shifts the active piece over one column to the right if possible
     public void MoveActivePieceRight() {
       if (ActivePieceCanMove(MoveDirTrollris.RIGHT)) {
         ActivePiece.MoveRight();
@@ -184,6 +195,7 @@ namespace Quadris {
       }
     }
 
+    //Function that rotates the active piece right if possible
     public void RotateActivePieceRight() {
       ActivePiece.RotateRight();
       ShadowPiece.RotateRight();
@@ -195,6 +207,7 @@ namespace Quadris {
       RefreshGridWithActivePiece();
     }
 
+    //Function that rotates the active piece left if possible
     public void RotateActivePieceLeft() {
       ActivePiece.RotateLeft();
       ShadowPiece.RotateLeft();
@@ -206,6 +219,7 @@ namespace Quadris {
       RefreshGridWithActivePiece();
     }
 
+    //Functoin that returns whether the shadow piece is capable of moving downward
     public bool ShadowPieceCanMove() {
       bool canMove = true;
       for (int c = 0; c < ShadowPiece.Layout.GetLength(1); c++) {
@@ -226,6 +240,8 @@ namespace Quadris {
       }
       return canMove;
     }
+      
+    //Function that returns whether the active piece can move in the given direction
     public bool ActivePieceCanMove(MoveDirTrollris moveDirTrollris) {
       bool canMove = true;
       switch (moveDirTrollris) {
@@ -290,6 +306,7 @@ namespace Quadris {
       return canMove;
     }
 
+    //Function that returns whether the active piece is attempting to move out of the board
     private bool CheckForOutOfBounds() {
       for (int r = 0; r < ActivePiece.Layout.GetLength(0); r++) {
         for (int c = 0; c < ActivePiece.Layout.GetLength(1); c++) {
@@ -304,6 +321,7 @@ namespace Quadris {
       return false;
     }
 
+    //Function that sets the active piece in place 
     public void SettlePiece() {
       for (int r = 0; r < Grid.GetLength(0); r++) {
         for (int c = 0; c < Grid.GetLength(1); c++) {
@@ -315,6 +333,7 @@ namespace Quadris {
       }
     }
 
+    //Functoin that determines whether there are any complete rows on the board and handles them
     public void CheckForLine() {
       int fullRows = 0;
       for (int curRow = 0; curRow < Grid.GetLength(0); curRow++) {
@@ -339,6 +358,7 @@ namespace Quadris {
       UpdateScore(fullRows);
     }
 
+    //Function that move the  active piece as far down as possible
     public void DropPieceHard() {
       while (ActivePieceCanMove(MoveDirTrollris.DOWN)) {
         ActivePiece.MoveDown();
@@ -347,6 +367,7 @@ namespace Quadris {
       Update();
     }
 
+    //Function that updates the score based on the number of rows completed
     private void UpdateScore(int fullRows) {
       ClearedRows += fullRows;
       if (fullRows > 0) {
@@ -355,6 +376,7 @@ namespace Quadris {
       LvlUP();
     }
 
+    //Function that updates the score based on the rows completed
     private void AddScore(int fullrows) {
       switch (fullrows) {
         case 1:
@@ -372,6 +394,7 @@ namespace Quadris {
       }
     }
 
+    //Function that toggles whether the game is paused
     public void ChangePause() {
       if(Paused) {
         Paused = false;
@@ -381,6 +404,7 @@ namespace Quadris {
       }
     }
 
+    //Function that changes the level based on the total number of rows cleard over the course of the game
     public void LvlUP() {
       if ((Level * 10) < ClearedRows && Level < 10) {
         Level++;
