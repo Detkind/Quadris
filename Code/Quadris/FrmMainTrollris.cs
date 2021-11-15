@@ -84,6 +84,7 @@ namespace Quadris {
       trollBase = 50;
     }
 
+    //Function that creates a grid that represents the game board
     private void CreateGrid() {
       panBoard.Width = CELL_WIDTH * BOARD_COLS + 4;
       panBoard.Height = CELL_HEIGHT * BOARD_ROWS + 4;
@@ -98,6 +99,7 @@ namespace Quadris {
       }
     }
 
+    //Functon that creates a grid to display the next piece
     private void CreateNextPieceGrid() {
       panelNextPiece.Width = CELL_WIDTH * NEXTPIECE_COLS;
       panelNextPiece.Height = CELL_HEIGHT * NEXTPIECE_ROWS;
@@ -112,6 +114,7 @@ namespace Quadris {
       }
     }
 
+    //Function that creates a grid to display the held piece
     private void CreateHeldPieceGrid() {
       panel2HeldPiece.Width = CELL_WIDTH * HELDPIECE_COLS;
       panel2HeldPiece.Height = CELL_WIDTH * HELDPIECE_ROWS;
@@ -126,6 +129,7 @@ namespace Quadris {
       }
     }
 
+    //Function that updates the next piece display to display the current next piece
     private void UpdateNextPieceGrid() {
       for (int col = 0; col < NEXTPIECE_COLS; col++) {
         for (int row = 0; row < NEXTPIECE_ROWS; row++) {
@@ -140,6 +144,7 @@ namespace Quadris {
       }
     }
 
+    //Function that updates the held piece display to display the current held piece
     private void UpdateHeldPieceGrid() {
       for (int col = 0; col < HELDPIECE_COLS; col++) {
         for (int row = 0; row < HELDPIECE_ROWS; row++) {
@@ -154,6 +159,7 @@ namespace Quadris {
       }
     }
 
+    //Function that updates the main game board
     private void UpdateGrid() {
       for (int col = 0; col < BOARD_COLS; col++) {
         for (int row = 0; row < BOARD_ROWS; row++) {
@@ -168,6 +174,7 @@ namespace Quadris {
       }
     }
 
+    //Function that returns a label that represents the grid cell at the given row and col on the game board
     private Label MakeGridCell(int row, int col) {
       return new Label() {
         Text = "",
@@ -179,14 +186,17 @@ namespace Quadris {
       };
     }
 
+    //Function that updates the score display
     private void UpdateScore() {
       lblScoreNum.Text = board.Score.ToString();
     }
 
+    //Function that updates the level display
     private void UpdateLevel() {
       lblLevelNum.Text = board.Level.ToString();
     }
 
+    //Function that get a new active and next piece
     private void GetNewActiveandNextPiece() {
       board.ActivePiece = nextPieceBoard.NextPiece;
       board.ShadowPiece = PieceTrollris.MakeShadowPieceCopy(nextPieceBoard.NextPiece);
@@ -194,6 +204,7 @@ namespace Quadris {
       UpdateGrid();
     }
 
+    //function that constantly updates the board while checking for events
     private void tmrFps_Tick(object sender, EventArgs e) {
       if (!board.Paused) {
         tmrFps.Interval = board.LevelSpeed;
@@ -244,6 +255,7 @@ namespace Quadris {
       }
     }
 
+    //Function that handles key inputs
     private void FrmMain_KeyDown(object sender, KeyEventArgs e) {
       switch (e.KeyCode) {
         case Keys.X:
@@ -344,12 +356,15 @@ namespace Quadris {
       }
     }
 
+    //Function that returns a random troll
     private int getTroll()
     {
             int troll = trollRandomizer.Next(1,5);
 
             return troll;
     }
+
+    //Function that enact the given troll
     private void triggerTroll(int troll)
     {
 
@@ -402,6 +417,7 @@ namespace Quadris {
         }
     }
 
+    //Function that updates the leaderboard values
     private void updateLeaderboard() {
       try {
         string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -451,10 +467,11 @@ namespace Quadris {
       catch (Exception e) { }
     }
 
-        private void btnTrollrisUnmuted_Click(object sender, EventArgs e)
-        {
-            if (trollBase > 10){ trollBase -= 10; }
-        }
+    //Function that increases the frequency of trolls when the mute button is pressed
+    private void btnTrollrisUnmuted_Click(object sender, EventArgs e)
+    {
+        if (trollBase > 10){ trollBase -= 10; }
+    }
 
     private void btnTrollrisMuted_Click(object sender, EventArgs e) {
       sndPlayer.PlayLooping();

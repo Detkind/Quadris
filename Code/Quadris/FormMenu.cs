@@ -29,30 +29,35 @@ namespace Quadris {
       updateLeaderboard();
     }
 
+    //Function that starts a game of quadris
     private void btnStartQuadris_Click(object sender, EventArgs e) {
       FrmMain quadrisGameForm = new FrmMain();
       quadrisGameForm.Show();
       this.Hide();
     }
 
+    //Function that starts a game of trollris
     private void btnStartTrollris_Click(object sender, EventArgs e) {
       FrmMainTrollris trollrisGameForm = new FrmMainTrollris();
       trollrisGameForm.Show();
       this.Hide();
     }
 
+    //Function that swaps to the trollris menu
     private void btnSwitchToTrollris_Click(object sender, EventArgs e) {
       if (index < listPanel.Count - 1) {
         listPanel[++index].BringToFront();
       }
     }
 
+    //Function that swaps to the quadris menu
     private void btnSwitchToQuadris_Click(object sender, EventArgs e) {
       if (index > 0) {
         listPanel[--index].BringToFront();
       }
     }
 
+    //Function that displays the leaderboard
     private void btnLeaderboard_Click(object sender, EventArgs e) {
       panelLeaderboard.BringToFront();
     }
@@ -73,6 +78,7 @@ namespace Quadris {
       panelLeaderboard.BringToFront();
     }
 
+    //Function that updates the scores on the leaderboard
     private void updateLeaderboard() {
       try {
         string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
