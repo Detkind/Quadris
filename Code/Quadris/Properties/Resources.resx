@@ -187,4 +187,22 @@
   <data name="unmuteIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Data\sound icons\unmuteIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="explosion_meme_sound_effect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\explosion meme sound effect.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="National_Anthem_of_USSR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\National Anthem of USSR.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Never_Gonna_Give_You_Up_Voice_Crack_HD_Version" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\Never Gonna Give You Up Voice Crack HD Version.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shooting_star_meme" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\shooting star meme.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Smash_Mouth___All_Star" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\Smash Mouth - All Star.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Smash_Mouth___All_Star_earrape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Data\Music\Smash Mouth - All Star earrape.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

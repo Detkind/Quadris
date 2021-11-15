@@ -68,6 +68,7 @@ namespace Quadris {
     public int LevelSpeed = 500;
     public bool GameOver = false;
     public bool Paused = false;
+    public bool Line = false;
 
     public BoardTrollris() {
       Grid = new GridCellInfoTrollris[24, 10];
@@ -84,6 +85,7 @@ namespace Quadris {
     /// 
     public bool Update() {
       bool settled = false;
+      Line = false;
       if (ActivePieceCanMove(MoveDirTrollris.DOWN)) {
         UpdateShadow();
         ActivePiece.MoveDown();
@@ -345,6 +347,7 @@ namespace Quadris {
           }
         }
         if (allFilled) {
+          Line = true;
           fullRows++;
           for (int col = 0; col < Grid.GetLength(1); col++) {
             for (int dropRow = curRow; dropRow > 0; dropRow--) {

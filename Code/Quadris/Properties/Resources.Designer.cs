@@ -270,12 +270,66 @@ namespace Quadris.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream explosion_meme_sound_effect {
+            get {
+                return ResourceManager.GetStream("explosion_meme_sound_effect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap muteIcon {
             get {
                 object obj = ResourceManager.GetObject("muteIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream National_Anthem_of_USSR {
+            get {
+                return ResourceManager.GetStream("National_Anthem_of_USSR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Never_Gonna_Give_You_Up_Voice_Crack_HD_Version {
+            get {
+                return ResourceManager.GetStream("Never_Gonna_Give_You_Up_Voice_Crack_HD_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream shooting_star_meme {
+            get {
+                return ResourceManager.GetStream("shooting_star_meme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Smash_Mouth___All_Star {
+            get {
+                return ResourceManager.GetStream("Smash_Mouth___All_Star", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Smash_Mouth___All_Star_earrape {
+            get {
+                return ResourceManager.GetStream("Smash_Mouth___All_Star_earrape", resourceCulture);
             }
         }
         

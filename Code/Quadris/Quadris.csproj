@@ -129,6 +129,12 @@
     <Content Include="Data\cell_red_shadow.png" />
     <Content Include="Data\cell_yellow_shadow.png" />
     <Content Include="Data\edit\cell_colors.fw.png" />
+    <None Include="Data\Music\explosion meme sound effect.wav" />
+    <None Include="Data\Music\National Anthem of USSR.wav" />
+    <None Include="Data\Music\Never Gonna Give You Up Voice Crack HD Version.wav" />
+    <None Include="Data\Music\shooting star meme.wav" />
+    <None Include="Data\Music\Smash Mouth - All Star earrape.wav" />
+    <None Include="Data\Music\Smash Mouth - All Star.wav" />
     <None Include="Data\sound icons\unmuteIcon.png" />
     <None Include="Data\sound icons\muteIcon.png" />
   </ItemGroup>

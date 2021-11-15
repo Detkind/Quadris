@@ -30,6 +30,7 @@ namespace Quadris {
     private HeldPieceBoardTrollris heldPieceBoard;
 
     private SoundPlayer sndPlayer;
+    private SoundPlayer explosionSound = new SoundPlayer(Resources.explosion_meme_sound_effect);
     private bool muted;
     private bool inverted;
     private Random trollRandomizer;
@@ -76,7 +77,7 @@ namespace Quadris {
       CreateNextPieceGrid();
       CreateHeldPieceGrid();
 
-      sndPlayer = new SoundPlayer(Resources.bg_music);
+      PickRandomSong();
       sndPlayer.PlayLooping();
       muted = false;
       inverted = false;
@@ -204,12 +205,39 @@ namespace Quadris {
       UpdateGrid();
     }
 
+    private void PickRandomSong() {
+      Random random = new Random();
+      int songNum = random.Next(4);
+      if (songNum == 0) {
+        sndPlayer = new SoundPlayer(Resources.National_Anthem_of_USSR);
+      }
+      if (songNum == 1) {
+        sndPlayer = new SoundPlayer(Resources.Never_Gonna_Give_You_Up_Voice_Crack_HD_Version);
+      }
+      if (songNum == 2) {
+        sndPlayer = new SoundPlayer(Resources.shooting_star_meme);
+      }
+      if (songNum == 3) {
+        sndPlayer = new SoundPlayer(Resources.Smash_Mouth___All_Star);
+      }
+    }
+
     //function that constantly updates the board while checking for events
     private void tmrFps_Tick(object sender, EventArgs e) {
+      if (muted) {
+        PickRandomSong();
+        sndPlayer.PlayLooping();
+        muted = false;
+      }
       if (!board.Paused) {
         tmrFps.Interval = board.LevelSpeed;
         // update method in board returns a boolean value on whether a piece has been settled or not
         bool settled = board.Update();
+        if (board.Line) {
+          sndPlayer.Stop();
+          muted = true;
+          explosionSound.PlaySync();
+        }
 
         if (board.GameOver) {
           sndPlayer.Stop();
@@ -238,8 +266,8 @@ namespace Quadris {
           Swapped = false;
           GetNewActiveandNextPiece();
           int startPos = trollRandomizer.Next(6);
-                    board.ActivePiece.GridCol = startPos;
-                    board.ShadowPiece.GridCol = startPos;
+          board.ActivePiece.GridCol = startPos;
+          board.ShadowPiece.GridCol = startPos;
         }
 
         // check to see if a troll will occur and enact that troll
@@ -347,6 +375,11 @@ namespace Quadris {
         case Keys.Space:
           if (!board.Paused) {
             board.DropPieceHard();
+            if (board.Line) {
+              sndPlayer.Stop();
+              muted = true;
+              explosionSound.PlaySync();
+            }
             GetNewActiveandNextPiece();
             board.Update();
             UpdateGrid();
@@ -467,10 +500,12 @@ namespace Quadris {
       catch (Exception e) { }
     }
 
-    //Function that increases the frequency of trolls when the mute button is pressed
+    //Function that increases the frequency of trolls when the mute button is pressed and also plays earrape song
     private void btnTrollrisUnmuted_Click(object sender, EventArgs e)
     {
         if (trollBase > 10){ trollBase -= 10; }
+      sndPlayer = new SoundPlayer(Resources.Smash_Mouth___All_Star_earrape);
+      sndPlayer.PlayLooping();
     }
 
     private void btnTrollrisMuted_Click(object sender, EventArgs e) {
